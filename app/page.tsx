@@ -45,9 +45,9 @@ export default function HomePage() {
 
       {/* HIGHLIGHTS */}
       <section className="grid gap-6 sm:grid-cols-3 text-center">
-        <Highlight value="50+" label="Команд" />
-        <Highlight value="200+" label="Материалов" />
-        <Highlight value="30+" label="Ивентов" />
+        <Highlight value="Open platform" label="easy to learn" />
+        <Highlight value="Growing community" label="Материалы от команд" />
+        <Highlight value="First community events" label="Онлайн и офлайн активности" />
       </section>
 
       {/* VALUES */}
