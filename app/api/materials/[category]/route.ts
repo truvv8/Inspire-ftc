@@ -6,10 +6,11 @@ export async function GET(
   { params }: { params: { category: string } }
 ) {
   const { data, error } = await supabase
-    .from("materials")
-    .select("*")
-    .eq("category", params.category)
-    .order("created_at", { ascending: false });
+  .from("materials")
+  .select("*")
+  .eq("category", params.category)
+  .eq("status", "approved") // ✅ ВОТ ЭТО КЛЮЧ
+  .order("created_at", { ascending: false });
 
   if (error) {
     return NextResponse.json({ error: error.message }, { status: 500 });
