@@ -31,14 +31,14 @@ const EVENTS: EventType[] = [
   { id: 2, title: "Qualifier – Turkistan (Day 2)", date: "2026-01-13", city: "Turkistan", venue: "Karavan Saray", description: "Day 2: matches and awards.", type: "official" },
   { id: 3, title: "Qualifier – Aktau", date: "2026-01-17", city: "Aktau", venue: "Aqtau International School", description: "Western region qualifier.", type: "official" },
   { id: 4, title: "Qualifier – Aktau (Day 2)", date: "2026-01-18", city: "Aktau", venue: "Aqtau International School", description: "Day 2: final rounds.", type: "official" },
-  { id: 5, title: "Qualifier – Astana", date: "2026-01-23", city: "Astana", venue: "Expo Center (qualifiers)", description: "Northern region qualifier.", type: "official" },
-  { id: 6, title: "Qualifier – Astana (Day 2)", date: "2026-01-24", city: "Astana", venue: "Expo Center (qualifiers)", description: "Day 2: playoffs.", type: "official" },
+  { id: 5, title: "Qualifier – Astana", date: "2026-01-23", city: "Astana",  description: "Northern region qualifier.", type: "official" },
+  { id: 6, title: "Qualifier – Astana (Day 2)", date: "2026-01-24", city: "Astana", description: "Day 2: playoffs.", type: "official" },
 
   // February events (4 days for Championship)
-  { id: 7, title: "Central Asia Championship — Day 1", date: "2026-02-10", city: "Astana", venue: "EXPO Center", description: "Opening and preliminary rounds.", type: "official" },
-  { id: 8, title: "Central Asia Championship — Day 2", date: "2026-02-11", city: "Astana", venue: "EXPO Center", description: "Semi-finals.", type: "official" },
-  { id: 9, title: "Central Asia Championship — Finals", date: "2026-02-12", city: "Astana", venue: "EXPO Center", description: "Final matches and awards.", type: "official" },
-  { id: 10, title: "Central Asia Championship — Closing", date: "2026-02-13", city: "Astana", venue: "EXPO Center", description: "Ceremony & networking.", type: "official" },
+  { id: 7, title: "Central Asia Championship — Day 1", date: "2026-02-10", city: "Astana", description: "Opening and preliminary rounds.", type: "official" },
+  { id: 8, title: "Central Asia Championship — Day 2", date: "2026-02-11", city: "Astana", description: "Semi-finals.", type: "official" },
+  { id: 9, title: "Central Asia Championship — Finals", date: "2026-02-12", city: "Astana", description: "Final matches and awards.", type: "official" },
+  { id: 10, title: "Central Asia Championship — Closing", date: "2026-02-13", city: "Astana", description: "Ceremony & networking.", type: "official" },
 ];
 
 function getMonthDays(year: number, month: number) {
