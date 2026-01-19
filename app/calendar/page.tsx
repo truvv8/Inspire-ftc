@@ -15,7 +15,6 @@ const HERO_EVENT = {
   title: "Kazakhstan Central Asia FIRST Championship 2026",
   date: "10–13 February",
   city: "Astana",
-  venue: "EXPO Center",
   image: "/events/astana.jpg",
 };
 
@@ -273,7 +272,7 @@ export default function CalendarPage() {
           </h1>
 
           <p className="text-sm text-gray-200">
-            📅 {HERO_EVENT.date} · 📍 {HERO_EVENT.city}, {HERO_EVENT.venue}
+            📅 {HERO_EVENT.date} · 📍 {HERO_EVENT.city}
           </p>
         </div>
       </div>
