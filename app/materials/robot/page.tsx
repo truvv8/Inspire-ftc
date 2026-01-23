@@ -1,3 +1,6 @@
+export const dynamic = "force-dynamic";
+
+
 import MaterialCard from "@/app/components/MaterialCard";
 import Link from "next/link";
 import { headers } from "next/headers";
