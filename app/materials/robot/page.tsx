@@ -1,9 +1,8 @@
 export const dynamic = "force-dynamic";
 
-
 import MaterialCard from "@/app/components/MaterialCard";
 import Link from "next/link";
-import { headers } from "next/headers";
+import { supabaseServer } from "@/lib/supabase-server";
 
 interface Material {
   id: string;
@@ -18,21 +17,20 @@ interface Material {
   created_at: string;
 }
 
-
 async function getMaterials(category: string): Promise<Material[]> {
-  const headersList = headers();
-  const host = headersList.get("host");
+  const { data, error } = await supabaseServer
+    .from("materials")
+    .select("*")
+    .eq("category", category)
+    .eq("status", "approved")
+    .order("created_at", { ascending: false });
 
-  const res = await fetch(`http://${host}/api/materials/${category}`, {
-    cache: "no-store",
-  });
-
-  if (!res.ok) {
-    console.error(await res.text());
+  if (error) {
+    console.error(error);
     throw new Error("Failed to fetch materials");
   }
 
-  return res.json();
+  return data as Material[];
 }
 
 export default async function RobotMaterialsPage() {
@@ -62,26 +60,25 @@ export default async function RobotMaterialsPage() {
 
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {materials.map((m) => {
-  const href =
-    m.external_url && m.external_url.trim() !== ""
-      ? m.external_url
-      : m.file_url && m.file_url.trim() !== ""
-      ? m.file_url
-      : null;
+          const href =
+            m.external_url && m.external_url.trim() !== ""
+              ? m.external_url
+              : m.file_url && m.file_url.trim() !== ""
+              ? m.file_url
+              : null;
 
-  return (
-    <MaterialCard
-      key={m.id}
-      title={m.title}
-      description={m.subcategory ?? "Описание отсутствует"}
-      tags={m.subcategory ? [m.subcategory] : []}
-      author={m.team_name}
-      date={new Date(m.created_at).toLocaleDateString("ru-RU")}
-      href={href}
-    />
-  );
-})}
-
+          return (
+            <MaterialCard
+              key={m.id}
+              title={m.title}
+              description={m.subcategory ?? "Описание отсутствует"}
+              tags={m.subcategory ? [m.subcategory] : []}
+              author={m.team_name}
+              date={new Date(m.created_at).toLocaleDateString("ru-RU")}
+              href={href}
+            />
+          );
+        })}
       </div>
     </div>
   );
