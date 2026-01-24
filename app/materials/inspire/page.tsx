@@ -2,6 +2,7 @@ export const dynamic = "force-dynamic";
 
 import MaterialCard from "@/app/components/MaterialCard";
 import { supabaseServer } from "@/lib/supabase-server";
+import { unstable_noStore as noStore } from "next/cache";
 
 interface Material {
   id: string;
@@ -14,7 +15,8 @@ interface Material {
   created_at: string;
 }
 
-async function getMaterials() {
+async function getMaterials(): Promise<Material[]> {
+  noStore();
   const { data, error } = await supabaseServer
     .from("materials")
     .select("*")
@@ -22,7 +24,11 @@ async function getMaterials() {
     .eq("status", "approved")
     .order("created_at", { ascending: false });
 
-  if (error) throw error;
+  if (error) {
+    console.error(error);
+    throw new Error("Failed to fetch Inspire materials");
+  }
+
   return data as Material[];
 }
 
@@ -33,25 +39,22 @@ export default async function InspireMaterialsPage() {
     <div className="space-y-12">
       <header className="space-y-3">
         <h1 className="text-3xl font-bold">Inspire</h1>
-        <p className="text-gray-600">
-          Культура FIRST и развитие команд.
-        </p>
+        <p className="text-gray-600">Культура FIRST и развитие команд.</p>
       </header>
 
       {materials.length === 0 && (
-        <p className="text-gray-500">
-          Пока нет материалов в этой категории.
-        </p>
+        <p className="text-gray-500">Пока нет материалов в этой категории.</p>
       )}
 
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {materials.map((m) => {
+          // Если нет ссылки — всё равно показываем карточку
           const href =
             m.external_url && m.external_url.trim() !== ""
               ? m.external_url
               : m.file_url && m.file_url.trim() !== ""
               ? m.file_url
-              : null;
+              : "#"; // ← чтобы карточка рендерилась
 
           return (
             <MaterialCard
