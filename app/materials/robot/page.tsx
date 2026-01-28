@@ -3,6 +3,7 @@ export const dynamic = "force-dynamic";
 import MaterialCard from "@/app/components/MaterialCard";
 import Link from "next/link";
 import { supabaseServer } from "@/lib/supabase-server";
+import { unstable_noStore as noStore } from "next/cache";
 
 interface Material {
   id: string;
@@ -18,6 +19,7 @@ interface Material {
 }
 
 async function getMaterials(category: string): Promise<Material[]> {
+  noStore();
   const { data, error } = await supabaseServer
     .from("materials")
     .select("*")

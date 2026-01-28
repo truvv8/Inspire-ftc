@@ -2,6 +2,27 @@ import { NextResponse } from "next/server";
 import { auth } from "@clerk/nextjs/server";
 import { supabaseServer } from "@/lib/supabase-server";
 
+function toSafeSegment(input: string, fallback: string) {
+  const safe = input
+    .trim()
+    .toLowerCase()
+    .replace(/\s+/g, "-")
+    .replace(/[^a-z0-9._-]+/g, "");
+  return safe || fallback;
+}
+
+function toSafeFilename(filename: string) {
+  const lastDot = filename.lastIndexOf(".");
+  const hasExt = lastDot > 0 && lastDot < filename.length - 1;
+  const base = hasExt ? filename.slice(0, lastDot) : filename;
+  const ext = hasExt ? filename.slice(lastDot).toLowerCase() : "";
+
+  const safeBase = toSafeSegment(base, "file");
+  const safeExt = ext.replace(/[^a-z0-9.]+/g, "");
+
+  return `${safeBase}${safeExt}`;
+}
+
 export async function POST(req: Request) {
   const { userId } = await auth();
   if (!userId) {
@@ -37,7 +58,9 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "File is required" }, { status: 400 });
     }
 
-    const filePath = `${teamName}/${category}/${subcategory}/${Date.now()}-${file.name}`;
+    const safeSubcategory = toSafeSegment(subcategory, "misc");
+    const safeFilename = toSafeFilename(file.name);
+    const filePath = `${teamName}/${category}/${safeSubcategory}/${Date.now()}-${safeFilename}`;
     const buffer = Buffer.from(await file.arrayBuffer());
 
     const { error: uploadError } = await supabaseServer.storage
