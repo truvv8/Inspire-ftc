@@ -1,9 +1,29 @@
-export const dynamic = "force-dynamic";
+﻿export const dynamic = "force-dynamic";
 
 import MaterialCard from "@/app/components/MaterialCard";
 import Link from "next/link";
+import { PT_Sans, PT_Serif } from "next/font/google";
+import type { CSSProperties } from "react";
 import { supabaseServer } from "@/lib/supabase-server";
 import { unstable_noStore as noStore } from "next/cache";
+
+const bodyFont = PT_Sans({
+  subsets: ["latin", "cyrillic"],
+  weight: ["400", "700"],
+});
+
+const displayFont = PT_Serif({
+  subsets: ["latin", "cyrillic"],
+  weight: ["400", "700"],
+});
+
+const heroStyles = {
+  "--hero-deep": "#0b1b1a",
+  "--hero-accent": "rgba(52, 211, 153, 0.4)",
+  "--hero-warm": "rgba(45, 212, 191, 0.35)",
+} as CSSProperties;
+
+const focusChips = ["CAD", "Механика", "Электрика", "Сборка"];
 
 interface Material {
   id: string;
@@ -37,51 +57,168 @@ async function getMaterials(category: string): Promise<Material[]> {
 
 export default async function RobotMaterialsPage() {
   const materials = await getMaterials("robot");
+  const totalMaterials = materials.length;
+  const uniqueTeams = new Set(materials.map((m) => m.team_name)).size;
+  const latestDate = materials[0]
+    ? new Date(materials[0].created_at).toLocaleDateString("ru-RU")
+    : "—";
 
   return (
-    <div className="space-y-12">
-      <header className="space-y-3">
-        <h1 className="text-3xl font-bold">Robot</h1>
-        <p className="max-w-2xl text-gray-600">
-          Проектирование, механика и электроника FTC-роботов.
-        </p>
-      </header>
+    <div className={`${bodyFont.className} space-y-10`}>
+      <section
+        className="relative overflow-hidden rounded-3xl border border-white/10 px-6 py-10 text-white shadow-lg"
+        style={heroStyles}
+      >
+        <div
+          className="absolute inset-0"
+          style={{
+            backgroundColor: "var(--hero-deep)",
+            backgroundImage:
+              "radial-gradient(circle at top right, var(--hero-accent), transparent 55%), radial-gradient(circle at bottom left, var(--hero-warm), transparent 55%)",
+          }}
+        />
+        <div
+          className="absolute inset-0 opacity-35"
+          style={{
+            backgroundImage:
+              "linear-gradient(90deg, rgba(255,255,255,0.08) 1px, transparent 1px), linear-gradient(rgba(255,255,255,0.08) 1px, transparent 1px)",
+            backgroundSize: "28px 28px",
+          }}
+        />
+        <div className="absolute -right-16 -top-16 h-48 w-48 rounded-full bg-white/10 blur-3xl motion-safe:animate-float-slow" />
+        <div className="absolute -bottom-20 left-10 h-56 w-56 rounded-full bg-emerald-300/10 blur-3xl motion-safe:animate-float-slow" />
 
-      <div className="flex justify-end mb-6">
-        <Link
-          href="/materials/upload"
-          className="bg-black text-white px-4 py-2 rounded"
-        >
-          Загрузить материал
-        </Link>
-      </div>
+        <div className="relative z-10 grid gap-8 lg:grid-cols-[1.2fr_0.8fr]">
+          <div className="space-y-5 motion-safe:animate-fade-up">
+            <span className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-xs uppercase tracking-[0.25em] text-white/70">
+              Robot materials
+            </span>
+            <h1
+              className={`${displayFont.className} text-4xl font-semibold leading-tight md:text-5xl`}
+            >
+              Robot
+            </h1>
+            <p className="max-w-2xl text-base text-white/80 md:text-lg">
+              Проектирование, механика и электроника FTC-роботов.
+            </p>
+            <div className="flex flex-wrap gap-2">
+              {focusChips.map((chip) => (
+                <span
+                  key={chip}
+                  className="rounded-full border border-white/20 bg-white/10 px-3 py-1 text-xs font-medium text-white/80"
+                >
+                  {chip}
+                </span>
+              ))}
+            </div>
+            <div className="flex flex-wrap items-center gap-3">
+              <Link
+                href="/materials/upload"
+                className="inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-semibold text-slate-900 shadow-sm transition hover:-translate-y-0.5 hover:shadow-lg"
+              >
+                Добавить материал
+                <span aria-hidden="true">→</span>
+              </Link>
+              <span className="text-xs text-white/60">
+                Делитесь чертежами и сборками
+              </span>
+            </div>
+          </div>
 
-      {materials.length === 0 && (
-        <p className="text-gray-500">Пока нет материалов</p>
-      )}
+          <div className="grid gap-4 sm:grid-cols-2 motion-safe:animate-fade-up-delay-1">
+            <div className="rounded-2xl border border-white/15 bg-white/10 p-4 backdrop-blur">
+              <p className="text-xs uppercase tracking-[0.2em] text-white/60">
+                Материалов
+              </p>
+              <p className={`${displayFont.className} text-3xl font-semibold`}>
+                {totalMaterials}
+              </p>
+              <p className="text-sm text-white/70">в библиотеке</p>
+            </div>
+            <div className="rounded-2xl border border-white/15 bg-white/10 p-4 backdrop-blur">
+              <p className="text-xs uppercase tracking-[0.2em] text-white/60">
+                Команд
+              </p>
+              <p className={`${displayFont.className} text-3xl font-semibold`}>
+                {uniqueTeams}
+              </p>
+              <p className="text-sm text-white/70">делятся опытом</p>
+            </div>
+            <div className="rounded-2xl border border-white/15 bg-white/10 p-4 backdrop-blur sm:col-span-2">
+              <p className="text-xs uppercase tracking-[0.2em] text-white/60">
+                Обновлено
+              </p>
+              <p className={`${displayFont.className} text-2xl font-semibold`}>
+                {latestDate}
+              </p>
+              <p className="text-sm text-white/70">последнее пополнение</p>
+            </div>
+          </div>
+        </div>
+      </section>
 
-      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {materials.map((m) => {
-          const href =
-            m.external_url && m.external_url.trim() !== ""
-              ? m.external_url
-              : m.file_url && m.file_url.trim() !== ""
-              ? m.file_url
-              : null;
+      <section className="space-y-6">
+        <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+          <div className="space-y-2">
+            <h2 className={`${displayFont.className} text-2xl text-slate-900 md:text-3xl`}>
+              Свежие материалы
+            </h2>
+            <p className="max-w-2xl text-slate-600">
+              Чертежи, гайды по сборке и советы по настройке узлов.
+            </p>
+          </div>
+          <div className="flex flex-wrap gap-2 text-xs text-slate-600">
+            <span className="rounded-full border border-slate-200 bg-white px-3 py-1">
+              Всего: {totalMaterials}
+            </span>
+            <span className="rounded-full border border-slate-200 bg-white px-3 py-1">
+              Команд: {uniqueTeams}
+            </span>
+          </div>
+        </div>
 
-          return (
-            <MaterialCard
-              key={m.id}
-              title={m.title}
-              description={m.subcategory ?? "Описание отсутствует"}
-              tags={m.subcategory ? [m.subcategory] : []}
-              author={m.team_name}
-              date={new Date(m.created_at).toLocaleDateString("ru-RU")}
-              href={href}
-            />
-          );
-        })}
-      </div>
+        <div className="relative rounded-3xl border border-slate-200/60 bg-white/70 p-6 shadow-sm backdrop-blur">
+          <div className="absolute inset-0 -z-10 rounded-3xl bg-[radial-gradient(circle_at_top,_rgba(52,211,153,0.12),_transparent_60%),radial-gradient(circle_at_bottom,_rgba(45,212,191,0.12),_transparent_60%)]" />
+          {materials.length === 0 ? (
+            <div className="rounded-2xl border border-dashed border-slate-200 bg-white/80 p-10 text-center text-slate-600">
+              <p className={`${displayFont.className} text-xl text-slate-800`}>
+                Пока нет материалов
+              </p>
+              <p className="mt-2 text-sm text-slate-500">
+                Загляните позже или добавьте свой гайд.
+              </p>
+            </div>
+          ) : (
+            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {materials.map((m, index) => {
+                const href =
+                  m.external_url && m.external_url.trim() !== ""
+                    ? m.external_url
+                    : m.file_url && m.file_url.trim() !== ""
+                    ? m.file_url
+                    : null;
+
+                return (
+                  <div
+                    key={m.id}
+                    className="motion-safe:animate-fade-up"
+                    style={{ animationDelay: `${index * 80}ms` }}
+                  >
+                    <MaterialCard
+                      title={m.title}
+                      description={m.subcategory ?? "Описание отсутствует"}
+                      tags={m.subcategory ? [m.subcategory] : []}
+                      author={m.team_name}
+                      date={new Date(m.created_at).toLocaleDateString("ru-RU")}
+                      href={href}
+                    />
+                  </div>
+                );
+              })}
+            </div>
+          )}
+        </div>
+      </section>
     </div>
   );
 }
