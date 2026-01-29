@@ -2,6 +2,9 @@ import { NextResponse } from "next/server";
 import { auth } from "@clerk/nextjs/server";
 import { supabaseServer } from "@/lib/supabase-server";
 
+export const runtime = "nodejs";
+export const maxDuration = 60;
+
 function toSafeSegment(input: string, fallback: string) {
   const safe = input
     .trim()
@@ -41,6 +44,10 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "Missing fields" }, { status: 400 });
   }
 
+  if (uploadType !== "file" && uploadType !== "link") {
+    return NextResponse.json({ error: "Invalid upload type" }, { status: 400 });
+  }
+
   if (!/^[A-Za-z0-9_]+_FTC$/.test(teamName)) {
     return NextResponse.json(
       { error: "Team name must be in format Team_Name_FTC" },
@@ -51,34 +58,62 @@ export async function POST(req: Request) {
   let fileUrl: string | null = null;
   let externalUrl: string | null = null;
 
-  // 📁 FILE
+  // FILE
   if (uploadType === "file") {
-    const file = formData.get("file") as File;
-    if (!file) {
-      return NextResponse.json({ error: "File is required" }, { status: 400 });
+    const existingPath = (formData.get("file_path") as string | null)?.trim();
+    if (existingPath) {
+      const expectedPrefix = `${teamName}/${category}/`;
+      if (!existingPath.startsWith(expectedPrefix)) {
+        return NextResponse.json(
+          { error: "File path does not match team/category" },
+          { status: 400 }
+        );
+      }
+
+      const { data: info, error: infoError } = await supabaseServer.storage
+        .from("materials")
+        .info(existingPath);
+
+      if (infoError || !info) {
+        return NextResponse.json(
+          { error: "Uploaded file not found" },
+          { status: 400 }
+        );
+      }
+
+      const { data } = supabaseServer.storage
+        .from("materials")
+        .getPublicUrl(existingPath);
+
+      fileUrl = data.publicUrl;
+    } else {
+      const file = formData.get("file") as File;
+      if (!file) {
+        return NextResponse.json({ error: "File is required" }, { status: 400 });
+      }
+
+      const safeSubcategory = toSafeSegment(subcategory, "misc");
+      const safeFilename = toSafeFilename(file.name);
+      const filePath = `${teamName}/${category}/${safeSubcategory}/${Date.now()}-${safeFilename}`;
+      const buffer = Buffer.from(await file.arrayBuffer());
+
+      const { error: uploadError } = await supabaseServer.storage
+        .from("materials")
+        .upload(filePath, buffer, { contentType: file.type });
+
+      if (uploadError) {
+        return NextResponse.json({ error: uploadError.message }, { status: 500 });
+      }
+
+      const { data } = supabaseServer.storage
+        .from("materials")
+        .getPublicUrl(filePath);
+
+      fileUrl = data.publicUrl;
     }
-
-    const safeSubcategory = toSafeSegment(subcategory, "misc");
-    const safeFilename = toSafeFilename(file.name);
-    const filePath = `${teamName}/${category}/${safeSubcategory}/${Date.now()}-${safeFilename}`;
-    const buffer = Buffer.from(await file.arrayBuffer());
-
-    const { error: uploadError } = await supabaseServer.storage
-      .from("materials")
-      .upload(filePath, buffer, { contentType: file.type });
-
-    if (uploadError) {
-      return NextResponse.json({ error: uploadError.message }, { status: 500 });
-    }
-
-    const { data } = supabaseServer.storage
-      .from("materials")
-      .getPublicUrl(filePath);
-
-    fileUrl = data.publicUrl;
   }
 
-  // 🔗 LINK
+  // LINK
   if (uploadType === "link") {
     externalUrl = formData.get("external_url") as string;
     if (!externalUrl) {
