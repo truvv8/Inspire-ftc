@@ -1,5 +1,6 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type CSSProperties } from "react";
+import { PT_Sans, PT_Serif } from "next/font/google";
 
 type EventType = {
   id: number | string;
@@ -10,6 +11,24 @@ type EventType = {
   description?: string;
   type?: "official" | "community";
 };
+
+const bodyFont = PT_Sans({
+  subsets: ["latin", "cyrillic"],
+  weight: ["400", "700"],
+});
+
+const displayFont = PT_Serif({
+  subsets: ["latin", "cyrillic"],
+  weight: ["400", "700"],
+});
+
+const calendarTheme = {
+  "--calendar-deep": "#0f172a",
+  "--calendar-ink": "#0b1220",
+  "--calendar-accent": "#f97316",
+  "--calendar-cool": "#38bdf8",
+  "--calendar-mint": "#22c55e",
+} as CSSProperties;
 
 const HERO_EVENT = {
   title: "Kazakhstan Central Asia FIRST Championship 2026",
@@ -251,242 +270,316 @@ export default function CalendarPage() {
   }
 
   return (
-    <div className="space-y-8 p-4 md:p-8 max-w-6xl mx-auto">
-      {/* HERO */}
-      <div
-        className="relative rounded-3xl overflow-hidden shadow-xl"
-        style={{
-          backgroundImage: `url(${HERO_EVENT.image})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          minHeight: "220px",
-        }}
-      >
-        <div className="bg-black/55 p-6 md:p-8 text-white space-y-3 h-full">
-          <span className="inline-block bg-black/80 px-3 py-1 rounded-full text-sm font-semibold">
-            FIRST AGE · SEASON EVENT
-          </span>
-
-          <h1 className="text-2xl md:text-4xl font-extrabold leading-tight">
-            {HERO_EVENT.title}
-          </h1>
-
-          <p className="text-sm text-gray-200">
-            📅 {HERO_EVENT.date} · 📍 {HERO_EVENT.city}
-          </p>
-        </div>
-      </div>
-
-      {/* UPCOMING chips */}
-      <section className="space-y-3">
-        <div className="flex items-center justify-between">
-          <h2 className="text-xl font-semibold">Upcoming FTC Events</h2>
-          <div className="text-sm text-gray-500">
-            Click chip → jump to month
-          </div>
-        </div>
-
-        <div className="flex flex-wrap gap-3">
-          {UPCOMING_DATES.map((c) => (
-            <button
-              key={c.key}
-              onClick={() => onUpcomingClick(c.jumpTo)}
-              className="rounded-full bg-orange-500 text-white px-5 py-2 text-sm font-medium shadow hover:scale-105 transition transform"
-              aria-label={`Jump to ${c.label}`}
-            >
-              {c.label}
-            </button>
-          ))}
-        </div>
-      </section>
-
-      {/* Calendar header + month switch */}
-      <section className="space-y-4">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <button
-              onClick={prevMonth}
-              className="px-3 py-2 rounded-lg border hover:bg-gray-100"
-              aria-label="Previous month"
-            >
-              ←
-            </button>
-
-            <div className="text-lg font-semibold">
-              {monthName} {year}
-            </div>
-
-            <button
-              onClick={() => setCurrentDate(new Date())}
-              className="px-3 py-2 rounded-lg border hover:bg-gray-100 text-sm"
-            >
-              Today
-            </button>
-            <button
-              onClick={nextMonth}
-              className="px-3 py-2 rounded-lg border hover:bg-gray-100"
-              aria-label="Next month"
-            >
-              →
-            </button>
-          </div>
-
-          <div className="text-sm text-gray-500">
-            Events this month: <span className="font-medium">{eventsForMonth.length}</span>
-            {loadingServerEvents && <span className="ml-2 text-xs text-gray-400">loading...</span>}
-          </div>
-        </div>
-
-        {/* Weekdays */}
-        <div className="grid grid-cols-7 rounded-2xl overflow-hidden border">
-          {["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"].map((d) => (
-            <div
-              key={d}
-              className="bg-gray-100 py-2 text-center text-sm font-medium border-b"
-            >
-              {d}
-            </div>
-          ))}
-
-          {/* Days */}
-          {days.map((date, idx) => {
-            const dayEvents = date
-              ? combinedEvents.filter(
-                  (e) =>
-                    new Date(e.date).toDateString() === date.toDateString()
-                )
-              : [];
-
-            const isToday =
-              date &&
-              new Date().toDateString() === date.toDateString();
-
-            return (
-              <div
-                key={idx}
-                className={`min-h-[120px] border p-2 relative bg-white ${date ? "" : "bg-gray-50/60"}`}
-              >
-                {date && (
-                  <span
-                    className={`absolute top-2 right-2 text-xs px-1 ${isToday ? "bg-blue-600 text-white rounded" : "text-gray-400"}`}
-                  >
-                    {date.getDate()}
-                  </span>
-                )}
-
-                <div className="mt-6 space-y-1">
-                {(() => {
-                  const MAX_VISIBLE = 2;
-                  const visibleEvents = dayEvents.slice(0, MAX_VISIBLE);
-                  const hiddenCount = dayEvents.length - visibleEvents.length;
-
-                  return (
-                    <>
-                      {visibleEvents.map((event) => (
-                        <div
-                          key={String(event.id)}
-                          onClick={() => openEventAndJump(event)}
-                          className={`rounded px-2 py-1 text-xs font-medium cursor-pointer ${
-                            event.type === "official"
-                              ? "bg-blue-100 text-blue-800 hover:bg-blue-200"
-                              : "bg-green-100 text-green-800 hover:bg-green-200"
-                          }`}
-                          role="button"
-                          tabIndex={0}
-                          onKeyDown={(e) => {
-                            if (e.key === "Enter") openEventAndJump(event);
-                          }}
-                        >
-                          {event.title}
-                        </div>
-                      ))}
-
-                      {hiddenCount > 0 && (
-                        <div
-                          onClick={() => openEventAndJump(dayEvents[0])}
-                          className="text-xs text-gray-500 cursor-pointer hover:underline"
-                        >
-                          +{hiddenCount} more
-                        </div>
-                      )}
-                    </>
-                  );
-                })()}
-              </div>
-
-              </div>
-            );
-          })}
-        </div>
-      </section>
-
-      {/* Modal */}
-      {selectedEvent && (
+    <div
+      className={`${bodyFont.className} relative overflow-hidden bg-slate-50`}
+      style={calendarTheme}
+    >
+      <div className="pointer-events-none absolute inset-0 -z-10">
+        <div className="absolute -top-28 right-[-120px] h-80 w-80 rounded-full bg-[radial-gradient(circle,_var(--calendar-cool),_transparent_70%)] opacity-60 blur-3xl" />
+        <div className="absolute top-1/3 -left-28 h-72 w-72 rounded-full bg-[radial-gradient(circle,_var(--calendar-accent),_transparent_72%)] opacity-50 blur-3xl" />
+        <div className="absolute bottom-[-140px] right-1/3 h-80 w-80 rounded-full bg-[radial-gradient(circle,_var(--calendar-mint),_transparent_70%)] opacity-40 blur-3xl" />
         <div
-          className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 px-4"
-          onMouseDown={onBackdropClick}
-        >
-          <div
-            ref={modalRef}
-            className="bg-white rounded-2xl p-6 w-full max-w-lg relative shadow-lg"
-            onMouseDown={(e) => e.stopPropagation()}
-          >
-            <button
-              onClick={() => setSelectedEvent(null)}
-              className="absolute top-3 right-3 text-gray-500 hover:text-black"
-              aria-label="Close"
-            >
-              ✕
-            </button>
-
-            <h3 className="text-xl font-bold">{selectedEvent.title}</h3>
-
-            <div className="flex items-center gap-4 text-sm text-gray-600 mt-2">
-              <div>📅 {new Date(selectedEvent.date).toLocaleDateString()}</div>
-              {selectedEvent.city && <div>· 📍 {selectedEvent.city}</div>}
-              {selectedEvent.venue && <div>· {selectedEvent.venue}</div>}
-            </div>
-
-            <p className="text-sm text-gray-700 mt-4">
-              {selectedEvent.description ??
-                "Подробности ещё уточняются. Здесь будет расписание, карта, команды и контакты организаторов."}
-            </p>
-
-            <div className="mt-5 flex gap-3">
-              <button
-                onClick={() => {
-                  const start = selectedEvent.date;
-                  const title = encodeURIComponent(selectedEvent.title);
-                  const url = `https://www.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${start.replace(/-/g, "")}/${start.replace(/-/g, "")}`;
-                  window.open(url, "_blank");
-                }}
-                className="rounded-lg bg-blue-600 text-white px-4 py-2 text-sm"
-              >
-                Add to Google Calendar
-              </button>
-
-              <button
-                onClick={() => setSelectedEvent(null)}
-                className="rounded-lg border px-4 py-2 text-sm"
-              >
-                Close
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* Placeholder for future community features */}
-      {/* Submit community event */}
-      <div className="flex justify-center pt-6">
-        <a
-          href="/calendar/submit"
-          className="inline-flex items-center gap-2 rounded-xl bg-green-600 px-6 py-3 text-sm font-semibold text-white shadow transition hover:bg-green-700 hover:scale-105"
-        >
-          ➕ Submit Community Event
-        </a>
+          className="absolute inset-0 opacity-40"
+          style={{
+            backgroundImage:
+              "linear-gradient(90deg, rgba(148,163,184,0.15) 1px, transparent 1px), linear-gradient(rgba(148,163,184,0.15) 1px, transparent 1px)",
+            backgroundSize: "44px 44px",
+          }}
+        />
       </div>
 
+      <div className="relative mx-auto max-w-6xl space-y-8 p-4 md:p-10">
+        {/* HERO */}
+        <section
+          className="relative overflow-hidden rounded-[32px] border border-white/40 text-white shadow-[0_30px_70px_-40px_rgba(15,23,42,0.9)] motion-safe:animate-fade-up"
+          style={{
+            backgroundImage: `linear-gradient(135deg, rgba(15,23,42,0.92), rgba(30,41,59,0.85)), url(${HERO_EVENT.image})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+          }}
+        >
+          <div className="absolute -right-16 -top-20 h-56 w-56 rounded-full bg-[radial-gradient(circle,_var(--calendar-cool),_transparent_70%)] opacity-60 blur-3xl" />
+          <div className="absolute -bottom-24 left-10 h-64 w-64 rounded-full bg-[radial-gradient(circle,_var(--calendar-accent),_transparent_72%)] opacity-50 blur-3xl" />
+
+          <div className="relative z-10 space-y-4 p-6 md:p-10">
+            <span className="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-1 text-xs uppercase tracking-[0.3em] text-white/70">
+              First Age - Season Event
+            </span>
+            <h1 className={`${displayFont.className} text-3xl md:text-5xl font-semibold leading-tight`}>
+              {HERO_EVENT.title}
+            </h1>
+            <div className="flex flex-wrap gap-3 text-sm text-white/80">
+              <span className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1">
+                Date: {HERO_EVENT.date}
+              </span>
+              <span className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1">
+                City: {HERO_EVENT.city}
+              </span>
+            </div>
+          </div>
+        </section>
+
+        {/* UPCOMING chips */}
+        <section className="space-y-4 rounded-3xl border border-slate-200/70 bg-white/80 p-6 shadow-sm backdrop-blur motion-safe:animate-fade-up-delay-1">
+          <div className="flex flex-wrap items-center justify-between gap-4">
+            <div>
+              <p className="text-xs uppercase tracking-[0.35em] text-slate-400">
+                Upcoming
+              </p>
+              <h2 className={`${displayFont.className} text-2xl text-slate-900`}>
+                Upcoming FTC Events
+              </h2>
+            </div>
+            <div className="text-sm text-slate-500">
+              Click chip -&gt; jump to month
+            </div>
+          </div>
+
+          <div className="flex flex-wrap gap-3">
+            {UPCOMING_DATES.map((c) => (
+              <button
+                key={c.key}
+                onClick={() => onUpcomingClick(c.jumpTo)}
+                className="rounded-full bg-gradient-to-r from-orange-500 via-amber-500 to-orange-600 px-5 py-2 text-sm font-semibold text-white shadow-md transition hover:-translate-y-0.5 hover:shadow-lg"
+                aria-label={`Jump to ${c.label}`}
+              >
+                {c.label}
+              </button>
+            ))}
+          </div>
+        </section>
+
+        {/* Calendar header + month switch */}
+        <section className="space-y-4 rounded-3xl border border-slate-200/70 bg-white/85 p-6 shadow-sm backdrop-blur motion-safe:animate-fade-up-delay-2">
+          <div className="flex flex-wrap items-center justify-between gap-4">
+            <div className="flex flex-wrap items-center gap-3">
+              <button
+                onClick={prevMonth}
+                className="rounded-full bg-slate-900 px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:-translate-y-0.5"
+                aria-label="Previous month"
+              >
+                Prev
+              </button>
+
+              <div className={`${displayFont.className} text-xl font-semibold text-slate-900 md:text-2xl`}>
+                {monthName} {year}
+              </div>
+
+              <button
+                onClick={() => setCurrentDate(new Date())}
+                className="rounded-full border border-slate-200 bg-white px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-slate-600 transition hover:bg-slate-50"
+              >
+                Today
+              </button>
+              <button
+                onClick={nextMonth}
+                className="rounded-full bg-slate-900 px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:-translate-y-0.5"
+                aria-label="Next month"
+              >
+                Next
+              </button>
+            </div>
+
+            <div className="text-sm text-slate-500">
+              Events this month:{" "}
+              <span className="font-semibold text-slate-900">
+                {eventsForMonth.length}
+              </span>
+              {loadingServerEvents && (
+                <span className="ml-2 text-xs text-slate-400">loading...</span>
+              )}
+            </div>
+          </div>
+
+          {/* Weekdays */}
+          <div className="grid grid-cols-7 overflow-hidden rounded-2xl border border-slate-200/70 bg-white/80">
+            {["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"].map((d) => (
+              <div
+                key={d}
+                className="bg-slate-900/90 py-2 text-center text-xs font-semibold uppercase tracking-[0.2em] text-white/80"
+              >
+                {d}
+              </div>
+            ))}
+
+            {/* Days */}
+            {days.map((date, idx) => {
+              const dayEvents = date
+                ? combinedEvents.filter(
+                    (e) =>
+                      new Date(e.date).toDateString() === date.toDateString()
+                  )
+                : [];
+
+              const isToday =
+                date && new Date().toDateString() === date.toDateString();
+              const isWeekend = date
+                ? date.getDay() === 0 || date.getDay() === 6
+                : false;
+
+              const baseTone = date
+                ? isWeekend
+                  ? "bg-slate-50/80"
+                  : "bg-white/80"
+                : "bg-slate-50/60";
+
+              return (
+                <div
+                  key={idx}
+                  className={`group relative min-h-[120px] border border-slate-200/70 p-2 transition ${baseTone} ${
+                    isToday
+                      ? "ring-2 ring-orange-400/70 ring-inset shadow-[0_0_0_1px_rgba(249,115,22,0.25)]"
+                      : "hover:bg-slate-50"
+                  }`}
+                >
+                  {date && (
+                    <span
+                      className={`absolute left-2 top-2 inline-flex h-6 min-w-[1.5rem] items-center justify-center rounded-full px-2 text-xs font-semibold ${
+                        isToday
+                          ? "bg-orange-500 text-white"
+                          : isWeekend
+                          ? "bg-slate-100 text-slate-500"
+                          : "text-slate-500"
+                      }`}
+                    >
+                      {date.getDate()}
+                    </span>
+                  )}
+
+                  <div className="mt-8 space-y-1">
+                    {(() => {
+                      const MAX_VISIBLE = 2;
+                      const visibleEvents = dayEvents.slice(0, MAX_VISIBLE);
+                      const hiddenCount = dayEvents.length - visibleEvents.length;
+
+                      return (
+                        <>
+                          {visibleEvents.map((event) => (
+                            <div
+                              key={String(event.id)}
+                              onClick={() => openEventAndJump(event)}
+                              className={`flex items-start gap-2 rounded-lg border px-2 py-1 text-xs font-semibold shadow-sm transition hover:-translate-y-0.5 ${
+                                event.type === "official"
+                                  ? "border-orange-200/80 bg-orange-50/90 text-orange-900 hover:bg-orange-100"
+                                  : "border-emerald-200/80 bg-emerald-50/90 text-emerald-900 hover:bg-emerald-100"
+                              }`}
+                              role="button"
+                              tabIndex={0}
+                              onKeyDown={(e) => {
+                                if (e.key === "Enter") openEventAndJump(event);
+                              }}
+                              title={event.title}
+                            >
+                              <span
+                                className={`mt-1 h-2 w-2 rounded-full ${
+                                  event.type === "official"
+                                    ? "bg-orange-500"
+                                    : "bg-emerald-500"
+                                }`}
+                              />
+                              <span className="block truncate">{event.title}</span>
+                            </div>
+                          ))}
+
+                          {hiddenCount > 0 && (
+                            <button
+                              onClick={() => openEventAndJump(dayEvents[0])}
+                              className="inline-flex items-center gap-2 text-xs font-medium text-slate-500 transition hover:text-slate-900"
+                            >
+                              +{hiddenCount} more
+                            </button>
+                          )}
+                        </>
+                      );
+                    })()}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </section>
+
+        {/* Modal */}
+        {selectedEvent && (
+          <div
+            className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 px-4 backdrop-blur-sm"
+            onMouseDown={onBackdropClick}
+          >
+            <div
+              ref={modalRef}
+              className="relative w-full max-w-lg overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-2xl"
+              onMouseDown={(e) => e.stopPropagation()}
+            >
+              <div className="h-2 bg-gradient-to-r from-orange-500 via-amber-500 to-sky-500" />
+              <div className="p-6">
+                <button
+                  onClick={() => setSelectedEvent(null)}
+                  className="absolute right-4 top-4 rounded-full bg-slate-100 px-2 py-1 text-sm text-slate-500 transition hover:text-slate-900"
+                  aria-label="Close"
+                >
+                  X
+                </button>
+
+                <h3 className={`${displayFont.className} text-2xl text-slate-900`}>
+                  {selectedEvent.title}
+                </h3>
+
+                <div className="mt-3 flex flex-wrap items-center gap-3 text-sm text-slate-600">
+                  <span className="rounded-full bg-slate-100 px-3 py-1">
+                    Date: {new Date(selectedEvent.date).toLocaleDateString()}
+                  </span>
+                  {selectedEvent.city && (
+                    <span className="rounded-full bg-slate-100 px-3 py-1">
+                      City: {selectedEvent.city}
+                    </span>
+                  )}
+                  {selectedEvent.venue && (
+                    <span className="rounded-full bg-slate-100 px-3 py-1">
+                      Venue: {selectedEvent.venue}
+                    </span>
+                  )}
+                </div>
+
+                <p className="mt-4 text-sm text-slate-700">
+                  {selectedEvent.description ??
+                    "Details will appear soon. Schedule, map, teams, and contacts will be added here."}
+                </p>
+
+                <div className="mt-6 flex flex-wrap gap-3">
+                  <button
+                    onClick={() => {
+                      const start = selectedEvent.date;
+                      const title = encodeURIComponent(selectedEvent.title);
+                      const url = `https://www.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${start.replace(/-/g, "")}/${start.replace(/-/g, "")}`;
+                      window.open(url, "_blank");
+                    }}
+                    className="rounded-full bg-slate-900 px-5 py-2 text-sm font-semibold text-white shadow transition hover:-translate-y-0.5"
+                  >
+                    Add to Google Calendar
+                  </button>
+
+                  <button
+                    onClick={() => setSelectedEvent(null)}
+                    className="rounded-full border border-slate-200 px-5 py-2 text-sm font-semibold text-slate-600 transition hover:bg-slate-50"
+                  >
+                    Close
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Submit community event */}
+        <div className="flex justify-center pt-4 motion-safe:animate-fade-up-delay-3">
+          <a
+            href="/calendar/submit"
+            className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-emerald-500 to-emerald-600 px-6 py-3 text-sm font-semibold text-white shadow-lg transition hover:-translate-y-0.5 hover:shadow-xl"
+          >
+            + Submit Community Event
+          </a>
+        </div>
+      </div>
     </div>
   );
 }
