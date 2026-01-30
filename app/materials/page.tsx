@@ -1,4 +1,5 @@
-﻿import Link from "next/link";
+﻿import Image from "next/image";
+import Link from "next/link";
 import { PT_Sans, PT_Serif } from "next/font/google";
 
 const bodyFont = PT_Sans({
@@ -35,13 +36,27 @@ const categories = [
 export default function MaterialsPage() {
   return (
     <div className={`${bodyFont.className} space-y-14`}>
-      <header className="space-y-4">
-        <p className="text-xs uppercase tracking-[0.35em] text-slate-400">
-          Inspire FTC
-        </p>
-        <h1 className={`${displayFont.className} text-4xl text-slate-900`}>
-          Материалы для команд FTC
-        </h1>
+      <header className="space-y-5">
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
+          <div className="flex h-20 w-20 items-center justify-center rounded-full bg-white shadow-lg ring-1 ring-slate-200/70">
+            <Image
+              src="/brand/nomadic-dragons-logo.png"
+              alt="Nomadic Dragons"
+              width={80}
+              height={80}
+              priority
+              className="h-16 w-16 object-contain"
+            />
+          </div>
+          <div className="space-y-2">
+            <p className="text-xs uppercase tracking-[0.35em] text-slate-400">
+              Inspire FTC
+            </p>
+            <h1 className={`${displayFont.className} text-4xl text-slate-900`}>
+              Материалы для команд FTC
+            </h1>
+          </div>
+        </div>
         <p className="max-w-2xl text-base text-slate-600">
           Обучающие материалы по робототехнике, программированию и Inspire-
           культуре FIRST Tech Challenge.
@@ -123,3 +138,6 @@ function UploadCard() {
     </section>
   );
 }
+
+
+
