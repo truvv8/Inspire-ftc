@@ -4,11 +4,7 @@ export default clerkMiddleware();
 
 export const config = {
   matcher: [
-    /*
-     * Match all request paths except for the ones starting with:
-     * - _next (static files)
-     * - favicon.ico
-     */
-    "/((?!_next|favicon.ico).*)",
+    // защищаем ВСЁ приложение, включая API
+    "/((?!_next|.*\\..*).*)",
   ],
 };

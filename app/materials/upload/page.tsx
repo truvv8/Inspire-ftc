@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabase";
+import { useTranslations } from "next-intl";
 
 const MAX_FILE_SIZE_BYTES = 50 * 1024 * 1024;
 
@@ -11,6 +12,7 @@ export default function UploadMaterialPage() {
   const [error, setError] = useState("");
   const [uploadType, setUploadType] = useState<"file" | "link">("file");
   const router = useRouter();
+  const t = useTranslations("upload");
 
   async function readJsonSafe(res: Response) {
     const contentType = res.headers.get("content-type") || "";
@@ -133,58 +135,63 @@ export default function UploadMaterialPage() {
     }
   }
 
+  const inputClass =
+    "w-full rounded-xl border border-white/10 bg-white/5 px-4 py-2.5 text-white placeholder-white/30 outline-none transition focus:border-inspire-orange/50 focus:ring-1 focus:ring-inspire-orange/30";
+
   return (
-    <div className="max-w-xl mx-auto p-6">
-      <h1 className="text-2xl font-bold mb-4">Загрузка материала</h1>
+    <div className="max-w-xl mx-auto">
+      <h1 className="text-2xl font-serif font-bold mb-6 text-white">{t("title")}</h1>
 
       <form onSubmit={handleSubmit} className="space-y-4">
-        <input name="title" placeholder="Название" required className="w-full border p-2" />
+        <input name="title" placeholder={t("nameLabel")} required className={inputClass} />
 
         <input
           name="team_name"
-          placeholder="Team_Name_FTC"
+          placeholder={t("teamNamePlaceholder")}
           required
-          className="w-full border p-2"
+          className={inputClass}
         />
 
-        <select name="category" required className="w-full border p-2">
-          <option value="">Категория</option>
-          <option value="robot">Robot</option>
-          <option value="code">Code</option>
-          <option value="inspire">Inspire</option>
+        <select name="category" required className={inputClass}>
+          <option value="" className="bg-black">{t("categoryLabel")}</option>
+          <option value="robot" className="bg-black">Robot</option>
+          <option value="code" className="bg-black">Code</option>
+          <option value="inspire" className="bg-black">Inspire</option>
         </select>
 
         <input
           name="subcategory"
-          placeholder="Подкатегория (например CAD)"
+          placeholder={t("subcategoryLabel")}
           required
-          className="w-full border p-2"
+          className={inputClass}
         />
 
         {/* TYPE SWITCH */}
-        <div className="flex gap-4">
-          <label className="flex items-center gap-2">
+        <div className="flex gap-4 text-white/70">
+          <label className="flex items-center gap-2 cursor-pointer">
             <input
               type="radio"
               checked={uploadType === "file"}
               onChange={() => setUploadType("file")}
+              className="accent-inspire-orange"
             />
-            Файл
+            {t("typeFile")}
           </label>
 
-          <label className="flex items-center gap-2">
+          <label className="flex items-center gap-2 cursor-pointer">
             <input
               type="radio"
               checked={uploadType === "link"}
               onChange={() => setUploadType("link")}
+              className="accent-inspire-orange"
             />
-            Ссылка (YouTube / Drive)
+            {t("typeLink")}
           </label>
         </div>
 
         {/* FILE */}
         {uploadType === "file" && (
-          <input type="file" name="file" required className="w-full" />
+          <input type="file" name="file" required className="w-full text-white/60 file:mr-4 file:rounded-lg file:border-0 file:bg-white/10 file:px-4 file:py-2 file:text-sm file:text-white file:cursor-pointer hover:file:bg-white/15" />
         )}
 
         {/* LINK */}
@@ -192,20 +199,20 @@ export default function UploadMaterialPage() {
           <input
             type="url"
             name="external_url"
-            placeholder="https://youtube.com/... или https://drive.google.com/..."
+            placeholder="https://youtube.com/... or https://drive.google.com/..."
             required
-            className="w-full border p-2"
+            className={inputClass}
           />
         )}
 
-        {error && <p className="text-red-600">{error}</p>}
+        {error && <p className="text-red-400 text-sm">{error}</p>}
 
         <button
           type="submit"
           disabled={loading}
-          className="bg-black text-white px-4 py-2 rounded"
+          className="rounded-xl bg-inspire-orange px-6 py-2.5 font-semibold text-white shadow-lg shadow-orange-500/20 transition hover:-translate-y-0.5 hover:bg-orange-600 disabled:opacity-50"
         >
-          {loading ? "Загрузка..." : "Загрузить"}
+          {loading ? t("submitLoading") : t("submit")}
         </button>
       </form>
     </div>

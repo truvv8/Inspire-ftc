@@ -1,4 +1,4 @@
-﻿export const dynamic = "force-dynamic";
+export const dynamic = "force-dynamic";
 
 import MaterialCard from "@/app/components/MaterialCard";
 import Link from "next/link";
@@ -23,7 +23,7 @@ const heroStyles = {
   "--hero-warm": "rgba(249, 115, 22, 0.4)",
 } as CSSProperties;
 
-const focusChips = ["Ценности", "Outreach", "Портфолио", "Комьюнити"];
+const focusChips = ["Values", "Outreach", "Portfolio", "Community"];
 
 interface Material {
   id: string;
@@ -112,10 +112,10 @@ export default async function InspireMaterialsPage() {
             <div className="flex flex-wrap items-center gap-3">
               <Link
                 href="/materials/upload"
-                className="inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-semibold text-slate-900 shadow-sm transition hover:-translate-y-0.5 hover:shadow-lg"
+                className="inline-flex items-center gap-2 rounded-full bg-inspire-orange px-4 py-2 text-sm font-semibold text-white shadow-lg shadow-orange-500/20 transition hover:-translate-y-0.5 hover:bg-orange-600"
               >
                 Добавить материал
-                <span aria-hidden="true">→</span>
+                <span aria-hidden="true">&rarr;</span>
               </Link>
               <span className="text-xs text-white/60">
                 Идеи и истории в одном месте
@@ -158,31 +158,30 @@ export default async function InspireMaterialsPage() {
       <section className="space-y-6">
         <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
           <div className="space-y-2">
-            <h2 className={`${displayFont.className} text-2xl text-slate-900 md:text-3xl`}>
+            <h2 className={`${displayFont.className} text-2xl text-white md:text-3xl`}>
               Свежие материалы
             </h2>
-            <p className="max-w-2xl text-slate-600">
+            <p className="max-w-2xl text-white/50">
               Истории команд, outreach-идеи и материалы для вдохновения.
             </p>
           </div>
-          <div className="flex flex-wrap gap-2 text-xs text-slate-600">
-            <span className="rounded-full border border-slate-200 bg-white px-3 py-1">
+          <div className="flex flex-wrap gap-2 text-xs text-white/50">
+            <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1">
               Всего: {totalMaterials}
             </span>
-            <span className="rounded-full border border-slate-200 bg-white px-3 py-1">
+            <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1">
               Команд: {uniqueTeams}
             </span>
           </div>
         </div>
 
-        <div className="relative rounded-3xl border border-slate-200/60 bg-white/70 p-6 shadow-sm backdrop-blur">
-          <div className="absolute inset-0 -z-10 rounded-3xl bg-[radial-gradient(circle_at_top,_rgba(251,191,36,0.12),_transparent_60%),radial-gradient(circle_at_bottom,_rgba(249,115,22,0.12),_transparent_60%)]" />
+        <div className="relative rounded-3xl border border-white/8 bg-white/[0.02] p-6 backdrop-blur">
           {materials.length === 0 ? (
-            <div className="rounded-2xl border border-dashed border-slate-200 bg-white/80 p-10 text-center text-slate-600">
-              <p className={`${displayFont.className} text-xl text-slate-800`}>
+            <div className="rounded-2xl border border-dashed border-white/10 p-10 text-center">
+              <p className={`${displayFont.className} text-xl text-white/70`}>
                 Пока нет материалов
               </p>
-              <p className="mt-2 text-sm text-slate-500">
+              <p className="mt-2 text-sm text-white/40">
                 Загляните позже или поделитесь своим вдохновением.
               </p>
             </div>
@@ -203,6 +202,7 @@ export default async function InspireMaterialsPage() {
                     style={{ animationDelay: `${index * 80}ms` }}
                   >
                     <MaterialCard
+                      id={m.id}
                       title={m.title}
                       description={m.subcategory ?? "Описание отсутствует"}
                       tags={m.subcategory ? [m.subcategory] : []}

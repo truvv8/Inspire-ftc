@@ -11,6 +11,14 @@ const config: Config = {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        "inspire-deep": "#0F172A",
+        "inspire-orange": "#F97316",
+        "inspire-emerald": "#10B981",
+        "inspire-sky": "#38BDF8",
+      },
+      fontFamily: {
+        sans: ["var(--font-pt-sans)", "sans-serif"],
+        serif: ["var(--font-pt-serif)", "serif"],
       },
     },
   },

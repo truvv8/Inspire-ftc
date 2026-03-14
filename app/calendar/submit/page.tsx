@@ -3,6 +3,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 type SubmitResult = {
   success?: boolean;
@@ -12,6 +13,7 @@ type SubmitResult = {
 
 export default function SubmitEventPage() {
   const router = useRouter();
+  const t = useTranslations("submitEvent");
 
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -37,11 +39,9 @@ export default function SubmitEventPage() {
   const [result, setResult] = useState<SubmitResult | null>(null);
 
   function makeIso(dateStr: string, timeStr: string) {
-    // if no time provided, interpret as start of day
     if (!dateStr) return null;
-    const t = timeStr ? timeStr : "00:00";
-    // Construct local ISO (YYYY-MM-DDTHH:MM:00)
-    return `${dateStr}T${t}:00`;
+    const tm = timeStr ? timeStr : "00:00";
+    return `${dateStr}T${tm}:00`;
   }
 
   function validateForm() {
@@ -89,7 +89,7 @@ export default function SubmitEventPage() {
     };
 
     if (useSingleDate) {
-      payload.date = date || null; // YYYY-MM-DD
+      payload.date = date || null;
       payload.start_time = null;
       payload.end_time = null;
     } else {
@@ -119,74 +119,77 @@ export default function SubmitEventPage() {
       setResult({ success: true, id: data?.id ?? null });
       setLoading(false);
 
-      // optionally redirect to calendar or show success
-      // small delay so user sees success
       setTimeout(() => {
         router.push("/calendar");
       }, 900);
-    } catch (e: any) {
-      setError(e?.message ?? String(e));
+    } catch (err: any) {
+      setError(err?.message ?? String(err));
       setLoading(false);
     }
   }
 
+  const inputClass =
+    "w-full rounded-xl border border-white/10 bg-white/5 px-4 py-2.5 text-white placeholder-white/30 outline-none transition focus:border-inspire-orange/50 focus:ring-1 focus:ring-inspire-orange/30";
+
   return (
-    <div className="max-w-2xl mx-auto p-6">
-      <h1 className="text-2xl font-bold mb-4">Отправить анонс мероприятия</h1>
+    <div className="max-w-2xl mx-auto">
+      <h1 className="text-2xl font-serif font-bold mb-6 text-white">{t("title")}</h1>
 
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
-          <label className="block text-sm font-medium">Название</label>
+          <label className="block text-sm font-medium text-white/60 mb-1">{t("nameLabel")}</label>
           <input
             value={title}
             onChange={(e) => setTitle(e.target.value)}
-            className="w-full border p-2 rounded"
-            placeholder="Например: Community Scrimmage"
+            className={inputClass}
+            placeholder={t("namePlaceholder")}
             required
           />
         </div>
 
         <div>
-          <label className="block text-sm font-medium">Описание (опционально)</label>
+          <label className="block text-sm font-medium text-white/60 mb-1">{t("descriptionLabel")}</label>
           <textarea
             value={description}
             onChange={(e) => setDescription(e.target.value)}
-            className="w-full border p-2 rounded"
+            className={`${inputClass} resize-none`}
             rows={3}
           />
         </div>
 
         <div>
-          <label className="block text-sm font-medium">Team Name (формат Team_Name_FTC)</label>
+          <label className="block text-sm font-medium text-white/60 mb-1">{t("teamNameLabel")}</label>
           <input
             value={teamName}
             onChange={(e) => setTeamName(e.target.value)}
-            className="w-full border p-2 rounded"
-            placeholder="Example_Team_FTC"
+            className={inputClass}
+            placeholder={t("teamNamePlaceholder")}
             required
           />
         </div>
 
         <div>
-          <label className="block text-sm font-medium mb-2">Время / дата</label>
+          <label className="block text-sm font-medium text-white/60 mb-2">{t("dateTimeLabel")}</label>
 
-          <div className="flex gap-4 items-center mb-2">
-            <label className="flex items-center gap-2">
+          <div className="flex gap-4 items-center mb-3 text-white/70">
+            <label className="flex items-center gap-2 cursor-pointer">
               <input
                 type="radio"
                 checked={useSingleDate}
                 onChange={() => setUseSingleDate(true)}
+                className="accent-inspire-orange"
               />
-              Обычная дата (день)
+              {t("singleDate")}
             </label>
 
-            <label className="flex items-center gap-2">
+            <label className="flex items-center gap-2 cursor-pointer">
               <input
                 type="radio"
                 checked={!useSingleDate}
                 onChange={() => setUseSingleDate(false)}
+                className="accent-inspire-orange"
               />
-              Диапазон (дата + время)
+              {t("dateRange")}
             </label>
           </div>
 
@@ -195,43 +198,43 @@ export default function SubmitEventPage() {
               type="date"
               value={date}
               onChange={(e) => setDate(e.target.value)}
-              className="border p-2 rounded"
+              className={inputClass}
               required
             />
           ) : (
-            <div className="grid grid-cols-2 gap-2">
-              <div>
-                <label className="block text-xs text-gray-600">Start date</label>
+            <div className="grid grid-cols-2 gap-3">
+              <div className="space-y-2">
+                <label className="block text-xs text-white/40">{t("startDate")}</label>
                 <input
                   type="date"
                   value={startDate}
                   onChange={(e) => setStartDate(e.target.value)}
-                  className="border p-2 rounded w-full"
+                  className={inputClass}
                   required
                 />
                 <input
                   type="time"
                   value={startTime}
                   onChange={(e) => setStartTime(e.target.value)}
-                  className="border p-2 rounded w-full mt-2"
+                  className={inputClass}
                   required
                 />
               </div>
 
-              <div>
-                <label className="block text-xs text-gray-600">End date</label>
+              <div className="space-y-2">
+                <label className="block text-xs text-white/40">{t("endDate")}</label>
                 <input
                   type="date"
                   value={endDate}
                   onChange={(e) => setEndDate(e.target.value)}
-                  className="border p-2 rounded w-full"
+                  className={inputClass}
                   required
                 />
                 <input
                   type="time"
                   value={endTime}
                   onChange={(e) => setEndTime(e.target.value)}
-                  className="border p-2 rounded w-full mt-2"
+                  className={inputClass}
                   required
                 />
               </div>
@@ -240,87 +243,81 @@ export default function SubmitEventPage() {
         </div>
 
         <div>
-          <label className="block text-sm font-medium">Instagram (обязательно)</label>
+          <label className="block text-sm font-medium text-white/60 mb-1">{t("instagramLabel")}</label>
           <input
             value={instagramUrl}
             onChange={(e) => setInstagramUrl(e.target.value)}
-            className="w-full border p-2 rounded"
+            className={inputClass}
             placeholder="https://instagram.com/your_team"
             required
           />
         </div>
 
         <div>
-          <label className="block text-sm font-medium">
-            Verification URL (IG/TG/Website) — обязательно
+          <label className="block text-sm font-medium text-white/60 mb-1">
+            {t("verificationLabel")}
           </label>
           <input
             value={verificationUrl}
             onChange={(e) => setVerificationUrl(e.target.value)}
-            className="w-full border p-2 rounded"
-            placeholder="ссылка для проверки анонса"
+            className={inputClass}
+            placeholder={t("verificationPlaceholder")}
             required
           />
         </div>
 
         <div>
-          <label className="block text-sm font-medium">Stream / Meet (опционально)</label>
+          <label className="block text-sm font-medium text-white/60 mb-1">{t("streamLabel")}</label>
           <input
             value={streamUrl}
             onChange={(e) => setStreamUrl(e.target.value)}
-            className="w-full border p-2 rounded"
+            className={inputClass}
             placeholder="https://meet.google.com/..."
           />
         </div>
 
         <div>
-          <label className="block text-sm font-medium">Community / Channel (опционально)</label>
+          <label className="block text-sm font-medium text-white/60 mb-1">{t("communityLabel")}</label>
           <input
             value={communityUrl}
             onChange={(e) => setCommunityUrl(e.target.value)}
-            className="w-full border p-2 rounded"
+            className={inputClass}
             placeholder="TG channel / website"
           />
         </div>
 
-        {error && <p className="text-red-600">{error}</p>}
+        {error && <p className="text-red-400 text-sm">{error}</p>}
         {result?.success && (
-          <p className="text-green-600">
-            Успешно отправлено. ID: {String(result.id ?? "—")}. Сейчас перенаправлю на календарь...
-          </p>
+          <p className="text-emerald-400 text-sm">{t("success")}</p>
         )}
-        {result?.error && <p className="text-red-600">{result.error}</p>}
+        {result?.error && <p className="text-red-400 text-sm">{result.error}</p>}
 
-        <div className="flex gap-2">
+        <div className="flex gap-3">
           <button
             type="submit"
             disabled={loading}
-            className="bg-blue-600 text-white px-4 py-2 rounded disabled:opacity-60"
+            className="rounded-xl bg-inspire-orange px-6 py-2.5 font-semibold text-white shadow-lg shadow-orange-500/20 transition hover:-translate-y-0.5 hover:bg-orange-600 disabled:opacity-50"
           >
-            {loading ? "Отправка..." : "Отправить на модерацию"}
+            {loading ? t("submitLoading") : t("submit")}
           </button>
 
           <button
             type="button"
             onClick={() => router.push("/calendar")}
-            className="border px-4 py-2 rounded"
+            className="rounded-xl border border-white/10 bg-white/5 px-6 py-2.5 font-semibold text-white/70 transition hover:bg-white/10"
           >
-            Отмена
+            {t("cancel")}
           </button>
         </div>
       </form>
 
-      <section className="mt-6 p-4 bg-gray-50 rounded">
-        <h3 className="font-medium mb-2">Подсказка</h3>
-        <ul className="text-sm list-disc ml-5 space-y-1">
-          <li>Instagram и verification URL обязательны — я проверяю анонс вручную.</li>
-          <li>
-            Если вы делаете одно-дневное офлайн мероприятие — используйте поле <b>date</b>.
-          </li>
-          <li>
-            Если это встреча/стрим/вебинар с привязкой ко времени — используйте диапазон start/end.
-          </li>
-          <li>После отправки статус будет <code>pending</code> — ты увидишь событие в админке и сможешь подтвердить.</li>
+      <section className="mt-8 glass-card rounded-xl p-5">
+        <h3 className="font-medium mb-2 text-white/70">{t("hintTitle")}</h3>
+        <ul className="text-sm list-disc ml-5 space-y-1 text-white/40">
+          <li>{t("hint1")}</li>
+          <li>{t("hint2")}</li>
+          <li>{t("hint3")}</li>
+          <li>{t("hint4")}</li>
         </ul>
       </section>
     </div>

@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
 import { auth } from "@clerk/nextjs/server";
 import { supabaseServer } from "@/lib/supabase-server";
+import { determineAutoModeration } from "@/lib/moderation";
+import { checkRateLimit } from "@/lib/rate-limit";
 
 export const runtime = "nodejs";
 export const maxDuration = 60;
@@ -46,6 +48,15 @@ export async function POST(req: Request) {
 
   if (uploadType !== "file" && uploadType !== "link") {
     return NextResponse.json({ error: "Invalid upload type" }, { status: 400 });
+  }
+
+  // Rate limit: max 5 uploads per hour
+  const rateCheck = await checkRateLimit(userId);
+  if (!rateCheck.allowed) {
+    return NextResponse.json(
+      { error: `Rate limit exceeded. Try again later. (${rateCheck.remaining} remaining)` },
+      { status: 429 }
+    );
   }
 
   if (!/^[A-Za-z0-9_]+_FTC$/.test(teamName)) {
@@ -121,6 +132,15 @@ export async function POST(req: Request) {
     }
   }
 
+  // Determine auto-moderation status
+  const file = uploadType === "file" ? (formData.get("file") as File | null) : null;
+  const moderation = determineAutoModeration(
+    uploadType,
+    externalUrl,
+    file?.name ?? (formData.get("file_path") as string | null),
+    file?.type,
+  );
+
   const { error: dbError } = await supabaseServer.from("materials").insert({
     title,
     team_name: teamName,
@@ -128,7 +148,7 @@ export async function POST(req: Request) {
     subcategory,
     file_url: fileUrl,
     external_url: externalUrl,
-    status: "pending",
+    status: moderation.status,
     uploaded_by: userId,
   });
 

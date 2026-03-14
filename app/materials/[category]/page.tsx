@@ -1,4 +1,6 @@
 import Link from "next/link";
+import ReportButton from "@/app/components/ReportButton";
+import { getTranslations } from "next-intl/server";
 
 interface Material {
   id: string;
@@ -27,24 +29,25 @@ export default async function CategoryPage({
   params: { category: string };
 }) {
   const materials = await getMaterials(params.category);
+  const t = await getTranslations("category");
 
   return (
-    <div className="max-w-4xl mx-auto p-6 space-y-6">
+    <div className="max-w-4xl mx-auto space-y-6">
       <div className="flex justify-between items-center">
-        <h1 className="text-3xl font-bold capitalize">
+        <h1 className="text-3xl font-serif font-bold capitalize text-white">
           {params.category}
         </h1>
 
         <Link
           href="/materials/upload"
-          className="bg-black text-white px-4 py-2 rounded"
+          className="rounded-xl bg-inspire-orange px-4 py-2 text-sm font-semibold text-white transition hover:bg-orange-600"
         >
-          Загрузить материал
+          {t("uploadMaterial")}
         </Link>
       </div>
 
       {materials.length === 0 && (
-        <p className="text-gray-500">Пока нет материалов</p>
+        <p className="text-white/40">{t("noMaterials")}</p>
       )}
 
       <div className="grid gap-4">
@@ -57,23 +60,28 @@ export default async function CategoryPage({
               : null;
 
           return (
-            <div key={m.id} className="border rounded-xl p-4">
-              <h2 className="font-semibold text-lg">{m.title}</h2>
-              <p className="text-sm text-gray-500">{m.subcategory}</p>
-              <p className="text-sm">Статус: {m.status}</p>
+            <div key={m.id} className="glass-card rounded-xl p-4">
+              <div className="flex items-start justify-between">
+                <div>
+                  <h2 className="font-semibold text-lg text-white">{m.title}</h2>
+                  <p className="text-sm text-white/40">{m.subcategory}</p>
+                </div>
+                <ReportButton materialId={m.id} />
+              </div>
+              <p className="text-sm mt-1 text-white/50">{t("status")}: {m.status}</p>
 
               {href ? (
                 <a
                   href={href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-blue-600 underline text-sm"
+                  className="text-inspire-orange hover:text-orange-400 underline text-sm transition"
                 >
-                  Открыть материал
+                  {t("openMaterial")}
                 </a>
               ) : (
-                <span className="text-gray-400 text-sm">
-                  Нет доступной ссылки
+                <span className="text-white/30 text-sm">
+                  {t("noLink")}
                 </span>
               )}
             </div>

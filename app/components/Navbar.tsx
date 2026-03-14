@@ -5,34 +5,47 @@ import {
   SignInButton,
   UserButton,
 } from "@clerk/nextjs";
+import { getTranslations } from "next-intl/server";
+import LanguageSwitcher from "./LanguageSwitcher";
 
-export default function Navbar() {
+export default async function Navbar() {
+  const t = await getTranslations("nav");
+
   return (
-    <header className="sticky top-0 z-50 border-b bg-white/80 backdrop-blur">
+    <header className="sticky top-0 z-50 border-b border-white/5 bg-black/70 backdrop-blur-xl">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6">
-        <Link href="/" className="text-xl font-bold">
-          Inspire FTC
+        <Link href="/" className="flex items-center gap-2 text-xl font-bold text-white">
+          <span className="inline-block h-2 w-2 rounded-full bg-inspire-orange" />
+          {t("brand")}
         </Link>
 
-        <nav className="flex items-center gap-6 text-sm font-medium">
-          <Link href="/materials" className="text-gray-600 hover:text-black">
-            Материалы
+        <nav className="flex items-center gap-5 text-sm font-medium">
+          <Link
+            href="/materials"
+            className="text-white/50 transition hover:text-white"
+          >
+            {t("materials")}
           </Link>
 
-          <Link href="/calendar" className="text-gray-600 hover:text-black">
-            FTC Calendar
+          <Link
+            href="/calendar"
+            className="text-white/50 transition hover:text-white"
+          >
+            {t("calendar")}
           </Link>
+
+          <LanguageSwitcher />
 
           <SignedOut>
             <SignInButton>
-              <button className="rounded-lg bg-black px-4 py-2 text-white hover:bg-gray-800">
-                Войти
+              <button className="rounded-lg bg-inspire-orange px-4 py-2 text-sm font-semibold text-white transition hover:bg-orange-600">
+                {t("signIn")}
               </button>
             </SignInButton>
           </SignedOut>
 
           <SignedIn>
-            <UserButton afterSignOutUrl="/" />
+            <UserButton />
           </SignedIn>
         </nav>
       </div>
