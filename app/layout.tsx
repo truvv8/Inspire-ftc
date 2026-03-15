@@ -37,7 +37,58 @@ export default async function RootLayout({
   const messages = await getMessages();
 
   return (
-    <ClerkProvider>
+    <ClerkProvider
+      appearance={{
+        variables: {
+          colorPrimary: "#10B981",
+          colorBackground: "#0a0a0a",
+          colorText: "#f1f5f9",
+          colorTextSecondary: "#94a3b8",
+          colorInputBackground: "rgba(255,255,255,0.05)",
+          colorInputText: "#f1f5f9",
+          colorDanger: "#ef4444",
+          borderRadius: "0.75rem",
+          fontFamily: "var(--font-pt-sans), sans-serif",
+        },
+        elements: {
+          card: {
+            border: "1px solid rgba(255,255,255,0.1)",
+            backgroundColor: "rgba(0,0,0,0.9)",
+            backdropFilter: "blur(24px)",
+            boxShadow: "0 0 60px rgba(16,185,129,0.08)",
+          },
+          headerTitle: { color: "#f1f5f9" },
+          headerSubtitle: { color: "rgba(255,255,255,0.5)" },
+          socialButtonsBlockButton: {
+            border: "1px solid rgba(255,255,255,0.1)",
+            backgroundColor: "rgba(255,255,255,0.05)",
+            color: "#f1f5f9",
+          },
+          formFieldInput: {
+            border: "1px solid rgba(255,255,255,0.1)",
+            backgroundColor: "rgba(255,255,255,0.05)",
+            color: "#f1f5f9",
+          },
+          formButtonPrimary: {
+            backgroundColor: "#10B981",
+            boxShadow: "0 10px 25px -5px rgba(16,185,129,0.3)",
+          },
+          footerActionLink: { color: "#34D399" },
+          dividerLine: { backgroundColor: "rgba(255,255,255,0.1)" },
+          dividerText: { color: "rgba(255,255,255,0.4)" },
+          formFieldLabel: { color: "rgba(255,255,255,0.6)" },
+          identityPreviewEditButton: { color: "#34D399" },
+          userButtonPopoverCard: {
+            border: "1px solid rgba(255,255,255,0.1)",
+            backgroundColor: "rgba(0,0,0,0.9)",
+            backdropFilter: "blur(24px)",
+          },
+          userButtonPopoverActionButton: { color: "rgba(255,255,255,0.7)" },
+          userButtonPopoverFooter: { display: "none" },
+          footer: { display: "none" },
+        },
+      }}
+    >
       <html lang={locale} className={`${ptSans.variable} ${ptSerif.variable}`}>
         <body className="bg-black font-sans text-slate-100 antialiased">
           <NextIntlClientProvider messages={messages}>

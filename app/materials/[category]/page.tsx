@@ -40,7 +40,7 @@ export default async function CategoryPage({
 
         <Link
           href="/materials/upload"
-          className="rounded-xl bg-inspire-orange px-4 py-2 text-sm font-semibold text-white transition hover:bg-orange-600"
+          className="rounded-xl bg-inspire-green px-4 py-2 text-sm font-semibold text-white transition hover:bg-emerald-600"
         >
           {t("uploadMaterial")}
         </Link>
@@ -75,7 +75,7 @@ export default async function CategoryPage({
                   href={href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-inspire-orange hover:text-orange-400 underline text-sm transition"
+                  className="text-inspire-green hover:text-emerald-400 underline text-sm transition"
                 >
                   {t("openMaterial")}
                 </a>

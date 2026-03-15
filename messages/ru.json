@@ -3,7 +3,8 @@
     "brand": "Inspire FTC",
     "materials": "Материалы",
     "calendar": "FTC Calendar",
-    "signIn": "Войти"
+    "signIn": "Войти",
+    "leaderboard": "Лидерборд"
   },
   "home": {
     "badge": "Платформа для FIRST Tech Challenge",
@@ -23,7 +24,18 @@
     "value2Title": "Inspire",
     "value2Description": "Ценности FIRST, портфолио, структура команды и развитие культуры.",
     "value3Title": "Сообщество",
-    "value3Description": "FTC‑календарь, ивенты команд и взаимодействие внутри платформы."
+    "value3Description": "FTC‑календарь, ивенты команд и взаимодействие внутри платформы.",
+    "ctaContribute": "Внести вклад",
+    "contributeTitle": "Присоединяйтесь",
+    "contributeSubtitle": "Есть множество способов помочь FTC-сообществу расти.",
+    "cardShareMaterials": "Поделиться материалами",
+    "cardShareMaterialsDesc": "Загрузите гайды, CAD-файлы, примеры кода и другие ресурсы для команд.",
+    "cardSubmitEvent": "Предложить событие",
+    "cardSubmitEventDesc": "Анонсируйте скримидж, воркшоп или встречу сообщества.",
+    "cardReport": "Сообщить о проблеме",
+    "cardReportDesc": "Отметьте неподходящий контент, чтобы платформа оставалась безопасной.",
+    "cardJoinCommunity": "Присоединиться",
+    "cardJoinCommunityDesc": "Зарегистрируйтесь и общайтесь с командами со всего мира."
   },
   "materials": {
     "badge": "Inspire FTC",

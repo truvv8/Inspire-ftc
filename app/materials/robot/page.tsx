@@ -114,7 +114,7 @@ export default async function RobotMaterialsPage() {
             <div className="flex flex-wrap items-center gap-3">
               <Link
                 href="/materials/upload"
-                className="inline-flex items-center gap-2 rounded-full bg-inspire-orange px-4 py-2 text-sm font-semibold text-white shadow-lg shadow-orange-500/20 transition hover:-translate-y-0.5 hover:bg-orange-600"
+                className="inline-flex items-center gap-2 rounded-full bg-inspire-green px-4 py-2 text-sm font-semibold text-white shadow-lg shadow-emerald-500/20 transition hover:-translate-y-0.5 hover:bg-emerald-600"
               >
                 Добавить материал
                 <span aria-hidden="true">&rarr;</span>

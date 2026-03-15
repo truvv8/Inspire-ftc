@@ -146,7 +146,7 @@ function UploadCard({
         </p>
         <Link
           href="/materials/upload"
-          className="mt-5 inline-flex items-center gap-3 rounded-full bg-gradient-to-b from-inspire-orange to-orange-600 px-6 py-2 text-sm font-semibold text-white shadow-[0_10px_20px_-12px_rgba(249,115,22,0.6)] transition hover:-translate-y-0.5 hover:from-orange-500 hover:to-orange-700"
+          className="mt-5 inline-flex items-center gap-3 rounded-full bg-gradient-to-b from-inspire-green to-emerald-600 px-6 py-2 text-sm font-semibold text-white shadow-[0_10px_20px_-12px_rgba(16,185,129,0.6)] transition hover:-translate-y-0.5 hover:from-emerald-500 hover:to-emerald-700"
         >
           <span className="flex h-7 w-7 items-center justify-center rounded-full bg-white/20 text-base">
             &uarr;

@@ -55,11 +55,11 @@ export default function MaterialCard({
       {...linkProps}
       className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-white/8 bg-white/[0.03] p-6 transition hover:-translate-y-1 hover:border-white/15 hover:bg-white/[0.06]"
     >
-      <div className="absolute inset-0 bg-gradient-to-br from-inspire-sky/5 via-transparent to-inspire-orange/5 opacity-0 transition duration-300 group-hover:opacity-100" />
+      <div className="absolute inset-0 bg-gradient-to-br from-inspire-sky/5 via-transparent to-inspire-green/5 opacity-0 transition duration-300 group-hover:opacity-100" />
 
       <div className="relative z-10 flex h-full flex-col gap-4">
         <div className="space-y-3">
-          <div className="h-1 w-10 rounded-full bg-gradient-to-r from-inspire-orange to-amber-400 transition-all duration-300 group-hover:w-14" />
+          <div className="h-1 w-10 rounded-full bg-gradient-to-r from-inspire-green to-teal-400 transition-all duration-300 group-hover:w-14" />
           <div>
             <h3 className="font-serif text-lg font-semibold tracking-tight text-white">
               {title}
@@ -86,7 +86,7 @@ export default function MaterialCard({
           <span className="inline-flex items-center gap-2">
             {id && <ReportButton materialId={id} />}
             {date}
-            <span className="text-white/20 transition group-hover:text-inspire-orange">
+            <span className="text-white/20 transition group-hover:text-inspire-green">
               <svg
                 className="h-4 w-4"
                 viewBox="0 0 24 24"

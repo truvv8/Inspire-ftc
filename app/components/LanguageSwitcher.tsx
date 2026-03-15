@@ -18,7 +18,7 @@ export default function LanguageSwitcher() {
         onClick={() => switchLocale("ru")}
         className={`rounded-full px-2.5 py-1 transition ${
           locale === "ru"
-            ? "bg-inspire-orange text-white"
+            ? "bg-inspire-green text-white"
             : "text-slate-400 hover:text-white"
         }`}
       >
@@ -28,7 +28,7 @@ export default function LanguageSwitcher() {
         onClick={() => switchLocale("en")}
         className={`rounded-full px-2.5 py-1 transition ${
           locale === "en"
-            ? "bg-inspire-orange text-white"
+            ? "bg-inspire-green text-white"
             : "text-slate-400 hover:text-white"
         }`}
       >

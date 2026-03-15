@@ -3,7 +3,8 @@
     "brand": "Inspire FTC",
     "materials": "Materials",
     "calendar": "FTC Calendar",
-    "signIn": "Sign In"
+    "signIn": "Sign In",
+    "leaderboard": "Leaderboard"
   },
   "home": {
     "badge": "Platform for FIRST Tech Challenge",
@@ -23,7 +24,18 @@
     "value2Title": "Inspire",
     "value2Description": "FIRST values, portfolio, team structure and culture development.",
     "value3Title": "Community",
-    "value3Description": "FTC calendar, team events and interaction within the platform."
+    "value3Description": "FTC calendar, team events and interaction within the platform.",
+    "ctaContribute": "Contribute",
+    "contributeTitle": "Get Involved",
+    "contributeSubtitle": "There are many ways you can help grow the FTC community.",
+    "cardShareMaterials": "Share Materials",
+    "cardShareMaterialsDesc": "Upload guides, CAD files, code examples and other resources for teams.",
+    "cardSubmitEvent": "Submit an Event",
+    "cardSubmitEventDesc": "Announce a scrimmage, workshop, or community meetup.",
+    "cardReport": "Report a Problem",
+    "cardReportDesc": "Flag inappropriate content to help keep the platform safe.",
+    "cardJoinCommunity": "Join the Community",
+    "cardJoinCommunityDesc": "Sign up and connect with teams from around the world."
   },
   "materials": {
     "badge": "Inspire FTC",

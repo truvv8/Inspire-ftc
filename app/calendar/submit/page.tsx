@@ -129,7 +129,7 @@ export default function SubmitEventPage() {
   }
 
   const inputClass =
-    "w-full rounded-xl border border-white/10 bg-white/5 px-4 py-2.5 text-white placeholder-white/30 outline-none transition focus:border-inspire-orange/50 focus:ring-1 focus:ring-inspire-orange/30";
+    "w-full rounded-xl border border-white/10 bg-white/5 px-4 py-2.5 text-white placeholder-white/30 outline-none transition focus:border-inspire-green/50 focus:ring-1 focus:ring-inspire-green/30";
 
   return (
     <div className="max-w-2xl mx-auto">
@@ -177,7 +177,7 @@ export default function SubmitEventPage() {
                 type="radio"
                 checked={useSingleDate}
                 onChange={() => setUseSingleDate(true)}
-                className="accent-inspire-orange"
+                className="accent-inspire-green"
               />
               {t("singleDate")}
             </label>
@@ -187,7 +187,7 @@ export default function SubmitEventPage() {
                 type="radio"
                 checked={!useSingleDate}
                 onChange={() => setUseSingleDate(false)}
-                className="accent-inspire-orange"
+                className="accent-inspire-green"
               />
               {t("dateRange")}
             </label>
@@ -296,7 +296,7 @@ export default function SubmitEventPage() {
           <button
             type="submit"
             disabled={loading}
-            className="rounded-xl bg-inspire-orange px-6 py-2.5 font-semibold text-white shadow-lg shadow-orange-500/20 transition hover:-translate-y-0.5 hover:bg-orange-600 disabled:opacity-50"
+            className="rounded-xl bg-inspire-green px-6 py-2.5 font-semibold text-white shadow-lg shadow-emerald-500/20 transition hover:-translate-y-0.5 hover:bg-emerald-600 disabled:opacity-50"
           >
             {loading ? t("submitLoading") : t("submit")}
           </button>

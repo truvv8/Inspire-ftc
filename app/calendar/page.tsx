@@ -212,9 +212,9 @@ export default function CalendarPage() {
     <div className={`${bodyFont.className} relative`}>
       {/* Aurora glow behind calendar */}
       <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
-        <div className="absolute left-1/4 top-1/4 h-[500px] w-[500px] rounded-full bg-inspire-orange/[0.06] blur-[150px] animate-aurora" />
+        <div className="absolute left-1/4 top-1/4 h-[500px] w-[500px] rounded-full bg-emerald-500/[0.06] blur-[150px] animate-aurora" />
         <div className="absolute right-1/4 top-1/3 h-[400px] w-[400px] rounded-full bg-inspire-sky/[0.05] blur-[130px] animate-aurora" style={{ animationDelay: "-7s" }} />
-        <div className="absolute bottom-1/4 left-1/3 h-[350px] w-[350px] rounded-full bg-emerald-500/[0.04] blur-[120px] animate-aurora" style={{ animationDelay: "-13s" }} />
+        <div className="absolute bottom-1/4 left-1/3 h-[350px] w-[350px] rounded-full bg-teal-400/[0.04] blur-[120px] animate-aurora" style={{ animationDelay: "-13s" }} />
       </div>
 
       <div className="relative mx-auto max-w-6xl space-y-6">
@@ -259,7 +259,7 @@ export default function CalendarPage() {
             )}
             <a
               href="/calendar/submit"
-              className="rounded-full bg-inspire-orange px-4 py-2 text-xs font-semibold text-white shadow-lg shadow-orange-500/20 transition hover:-translate-y-0.5 hover:bg-orange-600 hover:shadow-orange-500/30"
+              className="rounded-full bg-inspire-green px-4 py-2 text-xs font-semibold text-white shadow-lg shadow-emerald-500/20 transition hover:-translate-y-0.5 hover:bg-emerald-600 hover:shadow-emerald-500/30"
             >
               {t("submitEvent")}
             </a>
@@ -269,7 +269,7 @@ export default function CalendarPage() {
         {/* Calendar grid */}
         <div className="relative rounded-2xl overflow-hidden border border-white/[0.08] animate-fade-up-delay-1" style={{ background: "rgba(255,255,255,0.02)" }}>
           {/* Top gradient accent line */}
-          <div className="h-[2px] bg-gradient-to-r from-transparent via-inspire-orange/60 to-transparent" />
+          <div className="h-[2px] bg-gradient-to-r from-transparent via-inspire-green/60 to-transparent" />
 
           <div className="grid grid-cols-7">
             {(t.raw("weekdays") as string[]).map((d: string) => (
@@ -303,7 +303,7 @@ export default function CalendarPage() {
                     !date
                       ? "bg-white/[0.01]"
                       : isToday
-                      ? "animate-today-ring bg-orange-500/[0.06]"
+                      ? "animate-today-ring bg-emerald-500/[0.06]"
                       : isWeekend
                       ? "bg-white/[0.015]"
                       : "bg-transparent"
@@ -318,7 +318,7 @@ export default function CalendarPage() {
                     <span
                       className={`relative z-10 absolute left-2 top-2 inline-flex h-7 min-w-[1.75rem] items-center justify-center rounded-full px-2 text-xs font-bold transition-all ${
                         isToday
-                          ? "bg-orange-500 text-white shadow-lg shadow-orange-500/30"
+                          ? "bg-emerald-500 text-white shadow-lg shadow-emerald-500/30"
                           : hasEvents
                           ? "text-white/70 group-hover:text-white group-hover:bg-white/10"
                           : isWeekend
@@ -344,8 +344,8 @@ export default function CalendarPage() {
                               onClick={() => openEventAndJump(event)}
                               className={`flex items-start gap-2 rounded-lg border px-2 py-1 text-xs font-semibold transition-all duration-200 hover:-translate-y-0.5 cursor-pointer hover:shadow-lg ${
                                 event.type === "official"
-                                  ? "border-orange-500/30 bg-orange-500/10 text-orange-300 hover:bg-orange-500/20 hover:shadow-orange-500/10 hover:border-orange-500/50"
-                                  : "border-emerald-500/30 bg-emerald-500/10 text-emerald-300 hover:bg-emerald-500/20 hover:shadow-emerald-500/10 hover:border-emerald-500/50"
+                                  ? "border-emerald-500/30 bg-emerald-500/10 text-emerald-300 hover:bg-emerald-500/20 hover:shadow-emerald-500/10 hover:border-emerald-500/50"
+                                  : "border-sky-500/30 bg-sky-500/10 text-sky-300 hover:bg-sky-500/20 hover:shadow-sky-500/10 hover:border-sky-500/50"
                               }`}
                               role="button"
                               tabIndex={0}
@@ -357,8 +357,8 @@ export default function CalendarPage() {
                               <span
                                 className={`mt-1 h-2 w-2 shrink-0 rounded-full ${
                                   event.type === "official"
-                                    ? "bg-orange-500 shadow-[0_0_6px_rgba(249,115,22,0.6)]"
-                                    : "bg-emerald-500 shadow-[0_0_6px_rgba(16,185,129,0.6)]"
+                                    ? "bg-emerald-500 shadow-[0_0_6px_rgba(16,185,129,0.6)]"
+                                    : "bg-sky-500 shadow-[0_0_6px_rgba(56,189,248,0.6)]"
                                 }`}
                               />
                               <span className="block truncate">{event.title}</span>
@@ -392,11 +392,11 @@ export default function CalendarPage() {
         {/* Legend */}
         <div className="flex items-center justify-center gap-6 text-xs text-white/40 animate-fade-up-delay-2">
           <span className="flex items-center gap-2">
-            <span className="h-2.5 w-2.5 rounded-full bg-orange-500 shadow-[0_0_8px_rgba(249,115,22,0.5)]" />
+            <span className="h-2.5 w-2.5 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.5)]" />
             Official
           </span>
           <span className="flex items-center gap-2">
-            <span className="h-2.5 w-2.5 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.5)]" />
+            <span className="h-2.5 w-2.5 rounded-full bg-sky-500 shadow-[0_0_8px_rgba(56,189,248,0.5)]" />
             Community
           </span>
         </div>
@@ -411,10 +411,10 @@ export default function CalendarPage() {
           }}
         >
           <div
-            className="relative w-full max-w-md overflow-hidden rounded-3xl border border-white/10 bg-black/90 backdrop-blur-xl shadow-[0_0_60px_rgba(249,115,22,0.08)]"
+            className="relative w-full max-w-md overflow-hidden rounded-3xl border border-white/10 bg-black/90 backdrop-blur-xl shadow-[0_0_60px_rgba(16,185,129,0.08)]"
             onMouseDown={(e) => e.stopPropagation()}
           >
-            <div className="h-[2px] bg-gradient-to-r from-sky-500 via-emerald-500 to-orange-500" />
+            <div className="h-[2px] bg-gradient-to-r from-emerald-500 via-teal-400 to-sky-500" />
             <div className="p-6">
               <button
                 onClick={() => setDayPanelEvents(null)}
@@ -446,15 +446,15 @@ export default function CalendarPage() {
                     }}
                     className={`flex w-full items-start gap-3 rounded-xl border p-3 text-left transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg ${
                       event.type === "official"
-                        ? "border-orange-500/30 bg-orange-500/10 text-orange-300 hover:bg-orange-500/20 hover:shadow-orange-500/10"
-                        : "border-emerald-500/30 bg-emerald-500/10 text-emerald-300 hover:bg-emerald-500/20 hover:shadow-emerald-500/10"
+                        ? "border-emerald-500/30 bg-emerald-500/10 text-emerald-300 hover:bg-emerald-500/20 hover:shadow-emerald-500/10"
+                        : "border-sky-500/30 bg-sky-500/10 text-sky-300 hover:bg-sky-500/20 hover:shadow-sky-500/10"
                     }`}
                   >
                     <span
                       className={`mt-1.5 h-2.5 w-2.5 shrink-0 rounded-full ${
                         event.type === "official"
-                          ? "bg-orange-500 shadow-[0_0_6px_rgba(249,115,22,0.6)]"
-                          : "bg-emerald-500 shadow-[0_0_6px_rgba(16,185,129,0.6)]"
+                          ? "bg-emerald-500 shadow-[0_0_6px_rgba(16,185,129,0.6)]"
+                          : "bg-sky-500 shadow-[0_0_6px_rgba(56,189,248,0.6)]"
                       }`}
                     />
                     <div className="min-w-0">
@@ -479,10 +479,10 @@ export default function CalendarPage() {
         >
           <div
             ref={modalRef}
-            className="relative w-full max-w-lg overflow-hidden rounded-3xl border border-white/10 bg-black/90 backdrop-blur-xl shadow-[0_0_60px_rgba(249,115,22,0.08)]"
+            className="relative w-full max-w-lg overflow-hidden rounded-3xl border border-white/10 bg-black/90 backdrop-blur-xl shadow-[0_0_60px_rgba(16,185,129,0.08)]"
             onMouseDown={(e) => e.stopPropagation()}
           >
-            <div className="h-[2px] bg-gradient-to-r from-orange-500 via-amber-500 to-sky-500" />
+            <div className="h-[2px] bg-gradient-to-r from-emerald-500 via-teal-400 to-sky-500" />
             <div className="p-6">
               <button
                 onClick={() => setSelectedEvent(null)}
@@ -525,7 +525,7 @@ export default function CalendarPage() {
                     const url = `https://www.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${start.replace(/-/g, "")}/${start.replace(/-/g, "")}`;
                     window.open(url, "_blank");
                   }}
-                  className="rounded-full bg-inspire-orange px-5 py-2 text-sm font-semibold text-white shadow-lg shadow-orange-500/20 transition hover:-translate-y-0.5 hover:shadow-orange-500/30"
+                  className="rounded-full bg-inspire-green px-5 py-2 text-sm font-semibold text-white shadow-lg shadow-emerald-500/20 transition hover:-translate-y-0.5 hover:shadow-emerald-500/30"
                 >
                   {t("addToGoogle")}
                 </button>

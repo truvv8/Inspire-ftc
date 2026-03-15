@@ -84,7 +84,7 @@ export default async function InspireMaterialsPage() {
           }}
         />
         <div className="absolute -right-16 -top-16 h-48 w-48 rounded-full bg-white/10 blur-3xl motion-safe:animate-float-slow" />
-        <div className="absolute -bottom-20 left-10 h-56 w-56 rounded-full bg-orange-300/10 blur-3xl motion-safe:animate-float-slow" />
+        <div className="absolute -bottom-20 left-10 h-56 w-56 rounded-full bg-emerald-300/10 blur-3xl motion-safe:animate-float-slow" />
 
         <div className="relative z-10 grid gap-8 lg:grid-cols-[1.2fr_0.8fr]">
           <div className="space-y-5 motion-safe:animate-fade-up">
@@ -112,7 +112,7 @@ export default async function InspireMaterialsPage() {
             <div className="flex flex-wrap items-center gap-3">
               <Link
                 href="/materials/upload"
-                className="inline-flex items-center gap-2 rounded-full bg-inspire-orange px-4 py-2 text-sm font-semibold text-white shadow-lg shadow-orange-500/20 transition hover:-translate-y-0.5 hover:bg-orange-600"
+                className="inline-flex items-center gap-2 rounded-full bg-inspire-green px-4 py-2 text-sm font-semibold text-white shadow-lg shadow-emerald-500/20 transition hover:-translate-y-0.5 hover:bg-emerald-600"
               >
                 Добавить материал
                 <span aria-hidden="true">&rarr;</span>

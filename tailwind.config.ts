@@ -12,8 +12,9 @@ const config: Config = {
         background: "var(--background)",
         foreground: "var(--foreground)",
         "inspire-deep": "#0F172A",
-        "inspire-orange": "#F97316",
-        "inspire-emerald": "#10B981",
+        "inspire-green": "#10B981",
+        "inspire-green-light": "#34D399",
+        "inspire-green-deep": "#064E3B",
         "inspire-sky": "#38BDF8",
       },
       fontFamily: {
