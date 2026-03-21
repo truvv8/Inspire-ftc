@@ -6,6 +6,8 @@ import { PT_Sans, PT_Serif } from "next/font/google";
 import type { CSSProperties } from "react";
 import { supabaseServer } from "@/lib/supabase-server";
 import { unstable_noStore as noStore } from "next/cache";
+import { getTranslations } from "next-intl/server";
+import { getLocale } from "next-intl/server";
 
 const bodyFont = PT_Sans({
   subsets: ["latin", "cyrillic"],
@@ -54,11 +56,13 @@ async function getMaterials(): Promise<Material[]> {
 }
 
 export default async function CodeMaterialsPage() {
+  const t = await getTranslations("category");
+  const locale = await getLocale();
   const materials = await getMaterials();
   const totalMaterials = materials.length;
   const uniqueTeams = new Set(materials.map((m) => m.team_name)).size;
   const latestDate = materials[0]
-    ? new Date(materials[0].created_at).toLocaleDateString("ru-RU")
+    ? new Date(materials[0].created_at).toLocaleDateString(locale === "ru" ? "ru-RU" : "en-US")
     : "—";
 
   return (
@@ -89,7 +93,7 @@ export default async function CodeMaterialsPage() {
         <div className="relative z-10 grid gap-8 lg:grid-cols-[1.2fr_0.8fr]">
           <div className="space-y-5 motion-safe:animate-fade-up">
             <span className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-xs uppercase tracking-[0.25em] text-white/70">
-              Code materials
+              {t("codeBadge")}
             </span>
             <h1
               className={`${displayFont.className} text-4xl font-semibold leading-tight md:text-5xl`}
@@ -97,7 +101,7 @@ export default async function CodeMaterialsPage() {
               Code
             </h1>
             <p className="max-w-2xl text-base text-white/80 md:text-lg">
-              Программирование FTC-роботов: телеоп, автономка и архитектура.
+              {t("codeHeroDescription")}
             </p>
             <div className="flex flex-wrap gap-2">
               {focusChips.map((chip) => (
@@ -114,11 +118,11 @@ export default async function CodeMaterialsPage() {
                 href="/materials/upload"
                 className="inline-flex items-center gap-2 rounded-full bg-inspire-green px-4 py-2 text-sm font-semibold text-white shadow-lg shadow-emerald-500/20 transition hover:-translate-y-0.5 hover:bg-emerald-600"
               >
-                Добавить материал
+                {t("addMaterial")}
                 <span aria-hidden="true">&rarr;</span>
               </Link>
               <span className="text-xs text-white/60">
-                Публикация после модерации
+                {t("shareHint")}
               </span>
             </div>
           </div>
@@ -126,30 +130,30 @@ export default async function CodeMaterialsPage() {
           <div className="grid gap-4 sm:grid-cols-2 motion-safe:animate-fade-up-delay-1">
             <div className="rounded-2xl border border-white/15 bg-white/10 p-4 backdrop-blur">
               <p className="text-xs uppercase tracking-[0.2em] text-white/60">
-                Материалов
+                {t("materialsCount")}
               </p>
               <p className={`${displayFont.className} text-3xl font-semibold`}>
                 {totalMaterials}
               </p>
-              <p className="text-sm text-white/70">в библиотеке</p>
+              <p className="text-sm text-white/70">{t("inLibrary")}</p>
             </div>
             <div className="rounded-2xl border border-white/15 bg-white/10 p-4 backdrop-blur">
               <p className="text-xs uppercase tracking-[0.2em] text-white/60">
-                Команд
+                {t("teamsCount")}
               </p>
               <p className={`${displayFont.className} text-3xl font-semibold`}>
                 {uniqueTeams}
               </p>
-              <p className="text-sm text-white/70">делятся опытом</p>
+              <p className="text-sm text-white/70">{t("sharingExperience")}</p>
             </div>
             <div className="rounded-2xl border border-white/15 bg-white/10 p-4 backdrop-blur sm:col-span-2">
               <p className="text-xs uppercase tracking-[0.2em] text-white/60">
-                Обновлено
+                {t("updated")}
               </p>
               <p className={`${displayFont.className} text-2xl font-semibold`}>
                 {latestDate}
               </p>
-              <p className="text-sm text-white/70">последнее пополнение</p>
+              <p className="text-sm text-white/70">{t("latestAddition")}</p>
             </div>
           </div>
         </div>
@@ -159,19 +163,18 @@ export default async function CodeMaterialsPage() {
         <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
           <div className="space-y-2">
             <h2 className={`${displayFont.className} text-2xl text-white md:text-3xl`}>
-              Свежие материалы
+              {t("latestMaterials")}
             </h2>
             <p className="max-w-2xl text-white/50">
-              Подборка гайдов, репозиториев и заметок, которые помогают дотянуть
-              код до соревнований.
+              {t("codeLatestDescription")}
             </p>
           </div>
           <div className="flex flex-wrap gap-2 text-xs text-white/50">
             <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1">
-              Всего: {totalMaterials}
+              {t("total")}: {totalMaterials}
             </span>
             <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1">
-              Команд: {uniqueTeams}
+              {t("teams")}: {uniqueTeams}
             </span>
           </div>
         </div>
@@ -180,10 +183,10 @@ export default async function CodeMaterialsPage() {
           {materials.length === 0 ? (
             <div className="rounded-2xl border border-dashed border-white/10 p-10 text-center">
               <p className={`${displayFont.className} text-xl text-white/70`}>
-                Пока нет материалов
+                {t("noMaterials")}
               </p>
               <p className="mt-2 text-sm text-white/40">
-                Загляните позже или поделитесь своим опытом.
+                {t("noMaterialsHint")}
               </p>
             </div>
           ) : (
@@ -205,10 +208,10 @@ export default async function CodeMaterialsPage() {
                     <MaterialCard
                       id={m.id}
                       title={m.title}
-                      description={m.subcategory ?? "Описание отсутствует"}
+                      description={m.subcategory ?? t("noDescription")}
                       tags={m.subcategory ? [m.subcategory] : []}
                       author={m.team_name}
-                      date={new Date(m.created_at).toLocaleDateString("ru-RU")}
+                      date={new Date(m.created_at).toLocaleDateString(locale === "ru" ? "ru-RU" : "en-US")}
                       href={href}
                     />
                   </div>
