@@ -180,7 +180,7 @@ export default function ResourcesPage() {
         {(query || activeCategory || activeType) && (
           <p className="text-sm text-white/30">
             {filteredCount} result{filteredCount !== 1 ? "s" : ""}
-            {query && <> for "<span className="text-white/60">{query}</span>"</>}
+            {query && <> for &ldquo;<span className="text-white/60">{query}</span>&rdquo;</>}
           </p>
         )}
       </div>
