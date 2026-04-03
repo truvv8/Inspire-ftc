@@ -5,6 +5,7 @@ export type ResourceItem = {
   url: string;
   tags: string[];
   type: "library" | "guide" | "tool" | "official" | "video" | "repo";
+  level: "beginner" | "intermediate" | "advanced";
   stars?: number; // GitHub stars (approximate, as of 2025)
 };
 
@@ -31,6 +32,7 @@ export const RESOURCES: ResourceCategory[] = [
         tags: ["SDK", "Java", "Kotlin", "Official"],
         type: "official",
         stars: 1800,
+        level: "beginner",
       },
       {
         id: "game-manual-0",
@@ -39,6 +41,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://gm0.org",
         tags: ["Guide", "Hardware", "Software", "Strategy"],
         type: "guide",
+        level: "beginner",
       },
       {
         id: "gm0-software",
@@ -47,6 +50,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://gm0.org/en/latest/docs/software",
         tags: ["Software", "Java", "OpMode", "Guide"],
         type: "guide",
+        level: "beginner",
       },
       {
         id: "gm0-hardware",
@@ -55,6 +59,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://gm0.org/en/latest/docs/hardware-basics",
         tags: ["Hardware", "Mechanisms", "Drivetrain", "Guide"],
         type: "guide",
+        level: "beginner",
       },
       {
         id: "gm0-common-mechanisms",
@@ -63,6 +68,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://gm0.org/en/latest/docs/common-mechanisms",
         tags: ["Mechanisms", "CAD", "Hardware", "Guide"],
         type: "guide",
+        level: "intermediate",
       },
       {
         id: "rev-hardware-client",
@@ -71,6 +77,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://docs.revrobotics.com/rev-hardware-client",
         tags: ["REV", "Hardware", "Tool", "Official"],
         type: "tool",
+        level: "beginner",
       },
       {
         id: "rev-docs",
@@ -79,6 +86,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://docs.revrobotics.com",
         tags: ["REV", "Control Hub", "Hardware", "Official"],
         type: "official",
+        level: "intermediate",
       },
       {
         id: "ftc-field-diagrams",
@@ -87,6 +95,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://www.firstinspires.org/resource-library/ftc/game-and-season-info",
         tags: ["Field", "Official", "Strategy", "Diagrams"],
         type: "official",
+        level: "beginner",
       },
       {
         id: "ftc-docs-main",
@@ -95,6 +104,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://ftc-docs.firstinspires.org",
         tags: ["Docs", "Official", "Programming", "Hardware"],
         type: "official",
+        level: "beginner",
       },
       {
         id: "ftc-docs-control-system",
@@ -103,6 +113,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://ftc-docs.firstinspires.org/en/latest/control_hard_compon/ds_components/index.html",
         tags: ["Control Hub", "Hardware", "Wiring", "Official"],
         type: "official",
+        level: "intermediate",
       },
       {
         id: "ftc-game-manuals",
@@ -111,6 +122,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://www.firstinspires.org/resource-library/ftc/game-and-season-info",
         tags: ["Rules", "Game Manual", "Official", "Season"],
         type: "official",
+        level: "beginner",
       },
       {
         id: "gm0-awards",
@@ -119,6 +131,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://gm0.org/en/latest/docs/awards",
         tags: ["Awards", "Inspire", "Portfolio", "Guide"],
         type: "guide",
+        level: "beginner",
       },
       {
         id: "gm0-getting-started",
@@ -127,6 +140,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://gm0.org/en/latest/docs/getting-started",
         tags: ["Beginner", "Getting Started", "Guide", "Kit"],
         type: "guide",
+        level: "beginner",
       },
       {
         id: "ftc-tech-forum",
@@ -135,6 +149,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://ftc-forum.firstinspires.org",
         tags: ["Forum", "SDK", "Official", "Help"],
         type: "official",
+        level: "intermediate",
       },
       {
         id: "gm0-choosing-hardware",
@@ -143,6 +158,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://gm0.org/en/latest/docs/hardware-basics/choosing-hardware",
         tags: ["Hardware", "Kit", "Selection", "Guide"],
         type: "guide",
+        level: "beginner",
       },
       {
         id: "first-stem-resources",
@@ -151,6 +167,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://www.firstinspires.org/resource-library",
         tags: ["STEM", "Education", "Official", "Resources"],
         type: "official",
+        level: "beginner",
       },
     ],
   },
@@ -168,6 +185,7 @@ export const RESOURCES: ResourceCategory[] = [
         tags: ["Path Planning", "Autonomous", "Java", "Library"],
         type: "library",
         stars: 900,
+        level: "advanced",
       },
       {
         id: "road-runner-quickstart",
@@ -177,6 +195,7 @@ export const RESOURCES: ResourceCategory[] = [
         tags: ["Road Runner", "Quickstart", "Template", "Autonomous"],
         type: "repo",
         stars: 1200,
+        level: "advanced",
       },
       {
         id: "pedro-pathing",
@@ -186,6 +205,7 @@ export const RESOURCES: ResourceCategory[] = [
         tags: ["Path Planning", "Autonomous", "Java", "Library"],
         type: "library",
         stars: 400,
+        level: "advanced",
       },
       {
         id: "pedro-docs",
@@ -194,6 +214,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://pedropathing.com",
         tags: ["Pedro Pathing", "Docs", "Autonomous"],
         type: "guide",
+        level: "advanced",
       },
       {
         id: "rr-docs",
@@ -202,6 +223,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://learnroadrunner.com",
         tags: ["Road Runner", "Guide", "Autonomous", "Tuning"],
         type: "guide",
+        level: "intermediate",
       },
       {
         id: "mecanum-simulator",
@@ -210,6 +232,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://www.geogebra.org/m/xfjbquxt",
         tags: ["Simulator", "Mecanum", "Drivetrain", "Tool"],
         type: "tool",
+        level: "beginner",
       },
       {
         id: "rr-path-builder",
@@ -219,6 +242,7 @@ export const RESOURCES: ResourceCategory[] = [
         tags: ["Road Runner", "Path Builder", "Visualization", "Tool"],
         type: "tool",
         stars: 320,
+        level: "advanced",
       },
       {
         id: "rr1-quickstart",
@@ -228,6 +252,7 @@ export const RESOURCES: ResourceCategory[] = [
         tags: ["Road Runner", "1.0", "Quickstart", "Template"],
         type: "repo",
         stars: 600,
+        level: "advanced",
       },
       {
         id: "pedro-tuner",
@@ -236,6 +261,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://pedropathing.com/tuning",
         tags: ["Pedro Pathing", "Tuning", "Autonomous", "Guide"],
         type: "guide",
+        level: "advanced",
       },
       {
         id: "gm0-autonomous",
@@ -244,6 +270,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://gm0.org/en/latest/docs/software/tutorials/mecanum-drive",
         tags: ["Autonomous", "Strategy", "Guide", "Software"],
         type: "guide",
+        level: "intermediate",
       },
       {
         id: "acme-spatula",
@@ -252,6 +279,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://github.com/acmerobotics/road-runner",
         tags: ["Math", "Pose", "Library", "Autonomous"],
         type: "library",
+        level: "advanced",
       },
       {
         id: "wpilib-pathplanning",
@@ -260,6 +288,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://docs.wpilib.org/en/stable/docs/software/advanced-controls/trajectories",
         tags: ["Path Planning", "Motion Profile", "Control", "Guide"],
         type: "guide",
+        level: "advanced",
       },
       {
         id: "auto-builder-tool",
@@ -268,6 +297,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://ftc-docs.firstinspires.org/en/latest/programming_resources/blocks",
         tags: ["Blocks", "Autonomous", "Visual", "Beginner"],
         type: "tool",
+        level: "beginner",
       },
       {
         id: "ftc-pure-pursuit",
@@ -276,6 +306,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://gm0.org/en/latest/docs/software/concepts/pure-pursuit",
         tags: ["Pure Pursuit", "Autonomous", "Algorithm", "Guide"],
         type: "guide",
+        level: "advanced",
       },
       {
         id: "trajectory-sequences",
@@ -284,6 +315,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://learnroadrunner.com/trajectory-sequence.html",
         tags: ["Road Runner", "Trajectory", "Autonomous", "Guide"],
         type: "guide",
+        level: "advanced",
       },
       {
         id: "rr-tuning-guide",
@@ -292,6 +324,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://learnroadrunner.com/before-you-start.html",
         tags: ["Road Runner", "Tuning", "Autonomous", "Guide"],
         type: "guide",
+        level: "advanced",
       },
     ],
   },
@@ -309,6 +342,7 @@ export const RESOURCES: ResourceCategory[] = [
         tags: ["OpenCV", "Vision", "Simulator", "Tool"],
         type: "tool",
         stars: 350,
+        level: "intermediate",
       },
       {
         id: "easy-open-cv",
@@ -318,6 +352,7 @@ export const RESOURCES: ResourceCategory[] = [
         tags: ["OpenCV", "Vision", "Camera", "Library"],
         type: "library",
         stars: 600,
+        level: "intermediate",
       },
       {
         id: "vision-portal",
@@ -326,6 +361,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://ftc-docs.firstinspires.org/en/latest/programming_resources/vision/vision_portal",
         tags: ["Vision", "AprilTag", "TensorFlow", "Official"],
         type: "official",
+        level: "intermediate",
       },
       {
         id: "apriltag-guide",
@@ -334,6 +370,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://ftc-docs.firstinspires.org/en/latest/apriltag/vision_portal/apriltag_intro",
         tags: ["AprilTag", "Localization", "Vision", "Guide"],
         type: "guide",
+        level: "intermediate",
       },
       {
         id: "tensorflow-guide",
@@ -342,6 +379,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://ftc-docs.firstinspires.org/en/latest/programming_resources/vision/tensorflow_cs_2023",
         tags: ["TensorFlow", "Vision", "ML", "Guide"],
         type: "guide",
+        level: "advanced",
       },
       {
         id: "ftc-ml-toolchain",
@@ -350,6 +388,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://ftc-docs.firstinspires.org/en/latest/ftc_ml",
         tags: ["Machine Learning", "TensorFlow", "Vision", "Official"],
         type: "official",
+        level: "advanced",
       },
       {
         id: "opencv-color-detection",
@@ -358,6 +397,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://gm0.org/en/latest/docs/software/tutorials/opencv",
         tags: ["OpenCV", "Color", "Vision", "Guide"],
         type: "guide",
+        level: "intermediate",
       },
       {
         id: "limelightftc",
@@ -366,6 +406,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://limelightvision.io",
         tags: ["Limelight", "Vision", "Hardware", "AprilTag"],
         type: "tool",
+        level: "intermediate",
       },
       {
         id: "ftc-camera-guide",
@@ -374,6 +415,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://gm0.org/en/latest/docs/hardware-basics/camera",
         tags: ["Camera", "Vision", "Hardware", "Guide"],
         type: "guide",
+        level: "beginner",
       },
       {
         id: "grip-pipeline",
@@ -383,6 +425,7 @@ export const RESOURCES: ResourceCategory[] = [
         tags: ["GRIP", "OpenCV", "Vision", "Tool"],
         type: "tool",
         stars: 430,
+        level: "intermediate",
       },
       {
         id: "april-tag-field-layout",
@@ -391,6 +434,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://ftc-docs.firstinspires.org/en/latest/apriltag/vision_portal/apriltag_reference_frame",
         tags: ["AprilTag", "Field", "Localization", "Official"],
         type: "official",
+        level: "intermediate",
       },
       {
         id: "cv-zone",
@@ -400,6 +444,7 @@ export const RESOURCES: ResourceCategory[] = [
         tags: ["OpenCV", "Vision", "Python", "Library"],
         type: "library",
         stars: 4200,
+        level: "advanced",
       },
       {
         id: "deltacv",
@@ -409,6 +454,7 @@ export const RESOURCES: ResourceCategory[] = [
         tags: ["Vision", "Library", "Pipeline", "Performance"],
         type: "library",
         stars: 350,
+        level: "advanced",
       },
       {
         id: "color-range-creator",
@@ -417,6 +463,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://opencv.github.io/opencv-python-tutorial/Color-Space-Conversions-and-Simple-Thresholding.html",
         tags: ["HSV", "Color", "OpenCV", "Tool"],
         type: "tool",
+        level: "intermediate",
       },
     ],
   },
@@ -434,6 +481,7 @@ export const RESOURCES: ResourceCategory[] = [
         tags: ["Library", "Command-Based", "PID", "Java"],
         type: "library",
         stars: 450,
+        level: "intermediate",
       },
       {
         id: "ftclib-docs",
@@ -442,6 +490,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://docs.ftclib.org",
         tags: ["FTCLib", "Docs", "Library"],
         type: "guide",
+        level: "intermediate",
       },
       {
         id: "ftc-dashboard",
@@ -451,6 +500,7 @@ export const RESOURCES: ResourceCategory[] = [
         tags: ["Dashboard", "Telemetry", "PID", "Debug", "Tool"],
         type: "tool",
         stars: 700,
+        level: "intermediate",
       },
       {
         id: "gobilda-pinpoint",
@@ -459,6 +509,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://www.gobilda.com/pinpoint-odometry-computer",
         tags: ["Odometry", "Hardware", "Localization", "goBILDA"],
         type: "official",
+        level: "advanced",
       },
       {
         id: "acme-robotics-road-runner-2",
@@ -467,6 +518,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://rr.brott.dev",
         tags: ["Road Runner", "1.0", "Autonomous", "Actions"],
         type: "library",
+        level: "advanced",
       },
       {
         id: "kotlin-ftc",
@@ -475,6 +527,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://gm0.org/en/latest/docs/software/using-kotlin",
         tags: ["Kotlin", "Software", "Guide"],
         type: "guide",
+        level: "advanced",
       },
       {
         id: "rev-extensions",
@@ -483,6 +536,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://github.com/FIRST-Tech-Challenge/FtcRobotController",
         tags: ["REV", "Library", "Hardware", "Java"],
         type: "library",
+        level: "intermediate",
       },
       {
         id: "photon-ftc",
@@ -491,6 +545,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://github.com/nicholasbilotto/photon-ftc",
         tags: ["Vision", "Performance", "Library", "Camera"],
         type: "library",
+        level: "advanced",
       },
       {
         id: "vision-easy",
@@ -499,6 +554,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://github.com/OpenFTC/EasyOpenCV",
         tags: ["Vision", "Library", "AprilTag", "Java"],
         type: "library",
+        level: "intermediate",
       },
       {
         id: "control-library",
@@ -507,6 +563,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://gm0.org/en/latest/docs/software/concepts/control-loops",
         tags: ["Control", "PID", "Feedforward", "Library"],
         type: "library",
+        level: "advanced",
       },
       {
         id: "openftc-openrc",
@@ -516,6 +573,7 @@ export const RESOURCES: ResourceCategory[] = [
         tags: ["SDK", "Performance", "Build", "Tool"],
         type: "repo",
         stars: 250,
+        level: "intermediate",
       },
       {
         id: "gobilda-math",
@@ -524,6 +582,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://www.gobilda.com/motor-guide",
         tags: ["Calculator", "Motors", "Gearing", "Tool"],
         type: "tool",
+        level: "beginner",
       },
       {
         id: "roadrunnerv2-actions",
@@ -532,6 +591,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://rr.brott.dev/docs/v1-0/actions/",
         tags: ["Road Runner", "Actions", "Autonomous", "Guide"],
         type: "guide",
+        level: "advanced",
       },
       {
         id: "ftc-common-patterns",
@@ -540,6 +600,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://gm0.org/en/latest/docs/software/concepts",
         tags: ["Patterns", "Architecture", "Java", "Guide"],
         type: "guide",
+        level: "intermediate",
       },
       {
         id: "control-theory-basics",
@@ -548,6 +609,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://gm0.org/en/latest/docs/software/concepts/control-loops",
         tags: ["PID", "Control Theory", "Guide", "Software"],
         type: "guide",
+        level: "intermediate",
       },
     ],
   },
@@ -564,6 +626,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://www.onshape.com",
         tags: ["CAD", "OnShape", "Design", "Tool"],
         type: "tool",
+        level: "beginner",
       },
       {
         id: "gobilda-cad",
@@ -572,6 +635,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://www.gobilda.com/content/ftc/goBILDA_OnShape_Library.zip",
         tags: ["CAD", "goBILDA", "OnShape", "Parts"],
         type: "tool",
+        level: "beginner",
       },
       {
         id: "rev-cad",
@@ -580,6 +644,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://www.revrobotics.com/cad",
         tags: ["CAD", "REV", "Parts", "Official"],
         type: "official",
+        level: "beginner",
       },
       {
         id: "gm0-cad",
@@ -588,6 +653,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://gm0.org/en/latest/docs/cad-tutorials",
         tags: ["CAD", "Tutorial", "Guide", "Design"],
         type: "guide",
+        level: "beginner",
       },
       {
         id: "linear-slide-guide",
@@ -596,6 +662,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://gm0.org/en/latest/docs/common-mechanisms/linear-motion-guide/linear-slides",
         tags: ["Linear Slides", "Mechanisms", "Guide", "Hardware"],
         type: "guide",
+        level: "intermediate",
       },
       {
         id: "drivetrain-guide",
@@ -604,6 +671,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://gm0.org/en/latest/docs/common-mechanisms/drivetrains",
         tags: ["Drivetrain", "Mecanum", "Guide", "Hardware"],
         type: "guide",
+        level: "beginner",
       },
       {
         id: "servo-guide",
@@ -612,6 +680,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://gm0.org/en/latest/docs/hardware-basics/servo-guide",
         tags: ["Servo", "Hardware", "Guide"],
         type: "guide",
+        level: "beginner",
       },
       {
         id: "intake-guide",
@@ -620,6 +689,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://gm0.org/en/latest/docs/common-mechanisms/intakes",
         tags: ["Intake", "Mechanisms", "Guide", "Hardware"],
         type: "guide",
+        level: "intermediate",
       },
       {
         id: "arm-guide",
@@ -628,6 +698,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://gm0.org/en/latest/docs/common-mechanisms/arms",
         tags: ["Arm", "Linkage", "Mechanisms", "Guide"],
         type: "guide",
+        level: "intermediate",
       },
       {
         id: "tetrix-cad",
@@ -636,6 +707,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://www.pitsco.com/TETRIX/Resources",
         tags: ["CAD", "TETRIX", "Parts", "Official"],
         type: "official",
+        level: "beginner",
       },
       {
         id: "ftc-parts-matrix",
@@ -644,6 +716,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://www.firstinspires.org/resource-library/ftc/game-and-season-info",
         tags: ["Rules", "Parts", "Legal", "Official"],
         type: "official",
+        level: "beginner",
       },
       {
         id: "cad-best-practices",
@@ -652,6 +725,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://gm0.org/en/latest/docs/cad-tutorials/best-practices",
         tags: ["CAD", "Best Practices", "Design", "Guide"],
         type: "guide",
+        level: "intermediate",
       },
       {
         id: "onshape-tutorials",
@@ -660,6 +734,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://learn.onshape.com",
         tags: ["OnShape", "CAD", "Tutorial", "Beginner"],
         type: "guide",
+        level: "beginner",
       },
       {
         id: "chain-sprocket",
@@ -668,6 +743,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://gm0.org/en/latest/docs/common-mechanisms/power-transmission/chain-and-sprocket",
         tags: ["Chain", "Sprocket", "Power Transmission", "Guide"],
         type: "guide",
+        level: "intermediate",
       },
       {
         id: "belt-drive",
@@ -676,6 +752,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://gm0.org/en/latest/docs/common-mechanisms/power-transmission/belt-drive",
         tags: ["Belt", "Pulley", "Power Transmission", "Guide"],
         type: "guide",
+        level: "intermediate",
       },
       {
         id: "gearbox-guide",
@@ -684,6 +761,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://gm0.org/en/latest/docs/hardware-basics/motor-guide/gearbox-guide",
         tags: ["Gearbox", "Motors", "Gear Ratio", "Guide"],
         type: "guide",
+        level: "intermediate",
       },
       {
         id: "gripper-guide",
@@ -692,6 +770,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://gm0.org/en/latest/docs/common-mechanisms/intakes/claws",
         tags: ["Claw", "Gripper", "Mechanisms", "Guide"],
         type: "guide",
+        level: "intermediate",
       },
       {
         id: "onshape-assemblies",
@@ -700,6 +779,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://learn.onshape.com/courses/fundamentals-onshape-assemblies",
         tags: ["OnShape", "Assembly", "CAD", "Guide"],
         type: "guide",
+        level: "intermediate",
       },
       {
         id: "fusion360-ftc",
@@ -708,6 +788,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://www.autodesk.com/products/fusion-360/education",
         tags: ["Fusion 360", "CAD", "3D Print", "Tool"],
         type: "tool",
+        level: "intermediate",
       },
       {
         id: "3d-printing-ftc",
@@ -716,6 +797,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://gm0.org/en/latest/docs/hardware-basics/3d-printing",
         tags: ["3D Printing", "Fabrication", "Hardware", "Guide"],
         type: "guide",
+        level: "intermediate",
       },
     ],
   },
@@ -732,6 +814,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://ftc-docs.firstinspires.org/en/latest/programming_resources/android_studio_java",
         tags: ["Android Studio", "Setup", "Guide", "Tool"],
         type: "guide",
+        level: "beginner",
       },
       {
         id: "onbot-java",
@@ -740,6 +823,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://ftc-docs.firstinspires.org/en/latest/programming_resources/onbot_java",
         tags: ["OnBot Java", "Beginner", "Guide", "Programming"],
         type: "guide",
+        level: "beginner",
       },
       {
         id: "pid-tuning",
@@ -748,6 +832,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://gm0.org/en/latest/docs/software/concepts/control-loops",
         tags: ["PID", "Control", "Software", "Guide"],
         type: "guide",
+        level: "intermediate",
       },
       {
         id: "teleop-patterns",
@@ -756,6 +841,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://gm0.org/en/latest/docs/software/tutorials/gamepad-input",
         tags: ["TeleOp", "Gamepad", "Patterns", "Guide"],
         type: "guide",
+        level: "intermediate",
       },
       {
         id: "state-machine",
@@ -764,6 +850,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://gm0.org/en/latest/docs/software/concepts/finite-state-machines",
         tags: ["State Machine", "Autonomous", "Architecture", "Guide"],
         type: "guide",
+        level: "intermediate",
       },
       {
         id: "localization",
@@ -772,6 +859,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://gm0.org/en/latest/docs/software/concepts/odometry",
         tags: ["Odometry", "Localization", "Guide", "Autonomous"],
         type: "guide",
+        level: "advanced",
       },
       {
         id: "bulk-reads",
@@ -780,6 +868,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://gm0.org/en/latest/docs/software/tutorials/bulk-reads",
         tags: ["Performance", "I2C", "Software", "Guide"],
         type: "guide",
+        level: "advanced",
       },
       {
         id: "command-based",
@@ -788,6 +877,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://ftclib.org/command-base",
         tags: ["Command-Based", "Architecture", "FTCLib", "Guide"],
         type: "guide",
+        level: "advanced",
       },
       {
         id: "encoder-guide",
@@ -796,6 +886,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://gm0.org/en/latest/docs/software/tutorials/encoders",
         tags: ["Encoder", "Motors", "Software", "Guide"],
         type: "guide",
+        level: "beginner",
       },
       {
         id: "imu-guide",
@@ -804,6 +895,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://ftc-docs.firstinspires.org/en/latest/programming_resources/imu/imu",
         tags: ["IMU", "Gyroscope", "Heading", "Guide"],
         type: "guide",
+        level: "intermediate",
       },
       {
         id: "field-centric",
@@ -812,6 +904,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://gm0.org/en/latest/docs/software/tutorials/mecanum-drive",
         tags: ["Field-Centric", "Mecanum", "TeleOp", "Guide"],
         type: "guide",
+        level: "intermediate",
       },
       {
         id: "async-programming",
@@ -820,6 +913,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://gm0.org/en/latest/docs/software/tutorials/async",
         tags: ["Async", "Non-Blocking", "Architecture", "Guide"],
         type: "guide",
+        level: "advanced",
       },
       {
         id: "telemetry-guide",
@@ -828,6 +922,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://gm0.org/en/latest/docs/software/tutorials/using-telemetry",
         tags: ["Telemetry", "Debug", "Logging", "Guide"],
         type: "guide",
+        level: "beginner",
       },
       {
         id: "hardware-map",
@@ -836,6 +931,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://ftc-docs.firstinspires.org/en/latest/programming_resources/robot_config",
         tags: ["Hardware Map", "Configuration", "Setup", "Guide"],
         type: "guide",
+        level: "beginner",
       },
       {
         id: "adb-wireless",
@@ -844,6 +940,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://ftc-docs.firstinspires.org/en/latest/programming_resources/android_studio_java/Downloading_and_Installing_Android_Studio",
         tags: ["ADB", "Wireless", "Deployment", "Tool"],
         type: "guide",
+        level: "beginner",
       },
       {
         id: "git-ftc",
@@ -852,6 +949,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://gm0.org/en/latest/docs/software/tutorials/git",
         tags: ["Git", "GitHub", "Version Control", "Guide"],
         type: "guide",
+        level: "beginner",
       },
       {
         id: "motion-profile-guide",
@@ -860,6 +958,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://gm0.org/en/latest/docs/software/concepts/control-loops",
         tags: ["Motion Profile", "Control", "Motors", "Guide"],
         type: "guide",
+        level: "advanced",
       },
       {
         id: "linear-opmode-vs-opmode",
@@ -868,6 +967,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://ftc-docs.firstinspires.org/en/latest/programming_resources/android_studio_java/Android-Studio-Tutorial-4-OpMode-Structure",
         tags: ["OpMode", "Architecture", "Java", "Guide"],
         type: "guide",
+        level: "beginner",
       },
       {
         id: "java-ftc-basics",
@@ -876,6 +976,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://gm0.org/en/latest/docs/software/tutorials/java-basics",
         tags: ["Java", "Beginner", "Programming", "Guide"],
         type: "guide",
+        level: "beginner",
       },
       {
         id: "timer-scheduler",
@@ -884,6 +985,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://gm0.org/en/latest/docs/software/tutorials/async",
         tags: ["Timer", "ElapsedTime", "Async", "Guide"],
         type: "guide",
+        level: "intermediate",
       },
       {
         id: "blocks-programming",
@@ -892,6 +994,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://ftc-docs.firstinspires.org/en/latest/programming_resources/blocks",
         tags: ["Blocks", "Beginner", "Visual", "Guide"],
         type: "guide",
+        level: "beginner",
       },
       {
         id: "feedforward-control",
@@ -900,6 +1003,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://gm0.org/en/latest/docs/software/concepts/control-loops",
         tags: ["Feedforward", "Control", "PID", "Guide"],
         type: "guide",
+        level: "advanced",
       },
     ],
   },
@@ -916,6 +1020,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://docs.revrobotics.com/duo-control/control-hub-gs",
         tags: ["Control Hub", "REV", "Wiring", "Guide"],
         type: "guide",
+        level: "beginner",
       },
       {
         id: "rev-expansion-hub",
@@ -924,6 +1029,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://docs.revrobotics.com/duo-control/expansion-hub-gs",
         tags: ["Expansion Hub", "REV", "Wiring", "Guide"],
         type: "guide",
+        level: "intermediate",
       },
       {
         id: "motor-selection",
@@ -932,6 +1038,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://gm0.org/en/latest/docs/hardware-basics/motor-guide",
         tags: ["Motors", "Hardware", "Guide", "Selection"],
         type: "guide",
+        level: "beginner",
       },
       {
         id: "servo-selection",
@@ -940,6 +1047,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://gm0.org/en/latest/docs/hardware-basics/servo-guide/choosing-servo",
         tags: ["Servo", "Hardware", "Guide", "Selection"],
         type: "guide",
+        level: "intermediate",
       },
       {
         id: "power-budget",
@@ -948,6 +1056,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://gm0.org/en/latest/docs/hardware-basics/power-distribution",
         tags: ["Power", "Electronics", "Guide", "Safety"],
         type: "guide",
+        level: "intermediate",
       },
       {
         id: "rev-spm",
@@ -956,6 +1065,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://docs.revrobotics.com/duo-control/sensors/5v-power",
         tags: ["Servo", "Power", "REV", "Hardware"],
         type: "official",
+        level: "intermediate",
       },
       {
         id: "i2c-sensors",
@@ -964,6 +1074,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://gm0.org/en/latest/docs/hardware-basics/sensors",
         tags: ["I2C", "Sensors", "Electronics", "Guide"],
         type: "guide",
+        level: "intermediate",
       },
       {
         id: "wiring-guide",
@@ -972,6 +1083,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://gm0.org/en/latest/docs/hardware-basics/wiring",
         tags: ["Wiring", "Electronics", "Cable Management", "Guide"],
         type: "guide",
+        level: "beginner",
       },
       {
         id: "rev-blinkin",
@@ -980,6 +1092,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://docs.revrobotics.com/blinkin",
         tags: ["LED", "Blinkin", "REV", "Electronics"],
         type: "official",
+        level: "intermediate",
       },
       {
         id: "digital-sensors",
@@ -988,6 +1101,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://gm0.org/en/latest/docs/hardware-basics/sensors",
         tags: ["Sensors", "Digital", "Analog", "Hardware"],
         type: "guide",
+        level: "intermediate",
       },
       {
         id: "rev-driver-station",
@@ -996,6 +1110,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://docs.revrobotics.com/driver-station",
         tags: ["Driver Station", "App", "REV", "Official"],
         type: "official",
+        level: "beginner",
       },
       {
         id: "battery-guide",
@@ -1004,6 +1119,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://gm0.org/en/latest/docs/hardware-basics/battery-guide",
         tags: ["Battery", "Power", "Hardware", "Guide"],
         type: "guide",
+        level: "beginner",
       },
       {
         id: "control-hub-os",
@@ -1012,6 +1128,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://docs.revrobotics.com/duo-control/control-hub-gs/updating-control-hub-os",
         tags: ["Control Hub", "Firmware", "Update", "REV"],
         type: "guide",
+        level: "beginner",
       },
       {
         id: "servo-programmer",
@@ -1020,6 +1137,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://docs.revrobotics.com/duo-control/sensors/servos/smart-robot-servo-programmer",
         tags: ["Servo", "Programmer", "REV", "Tool"],
         type: "tool",
+        level: "beginner",
       },
       {
         id: "gobilda-yellowjacket",
@@ -1028,6 +1146,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://www.gobilda.com/yellow-jacket-planetary-gear-motors",
         tags: ["Motors", "goBILDA", "Specs", "Hardware"],
         type: "official",
+        level: "beginner",
       },
       {
         id: "rev-ultra-hex",
@@ -1036,6 +1155,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://docs.revrobotics.com/duo-control/motors/rev-motors",
         tags: ["Motors", "REV", "Specs", "Hardware"],
         type: "official",
+        level: "beginner",
       },
       {
         id: "axon-servos",
@@ -1044,6 +1164,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://www.axon-robotics.com",
         tags: ["Servo", "Axon", "Hardware", "Guide"],
         type: "official",
+        level: "intermediate",
       },
       {
         id: "sparkfun-otos",
@@ -1052,6 +1173,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://www.sparkfun.com/products/24904",
         tags: ["Odometry", "Localization", "Hardware", "Sensor"],
         type: "official",
+        level: "advanced",
       },
     ],
   },
@@ -1068,6 +1190,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://ftcscout.org",
         tags: ["Scouting", "Statistics", "Strategy", "Tool"],
         type: "tool",
+        level: "intermediate",
       },
       {
         id: "the-orange-alliance",
@@ -1076,6 +1199,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://theorangealliance.org",
         tags: ["Events", "Statistics", "Results", "Tool"],
         type: "tool",
+        level: "beginner",
       },
       {
         id: "statbotics",
@@ -1084,6 +1208,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://www.statbotics.io",
         tags: ["Statistics", "Analytics", "Strategy", "Tool"],
         type: "tool",
+        level: "advanced",
       },
       {
         id: "scouting-guide",
@@ -1092,6 +1217,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://gm0.org/en/latest/docs/competition/match-scouting",
         tags: ["Scouting", "Strategy", "Competition", "Guide"],
         type: "guide",
+        level: "intermediate",
       },
       {
         id: "alliance-selection",
@@ -1100,6 +1226,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://gm0.org/en/latest/docs/competition/alliance-selection",
         tags: ["Alliance", "Selection", "Strategy", "Competition"],
         type: "guide",
+        level: "intermediate",
       },
       {
         id: "pit-scouting",
@@ -1108,6 +1235,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://gm0.org/en/latest/docs/competition/pit-scouting",
         tags: ["Scouting", "Pit", "Competition", "Guide"],
         type: "guide",
+        level: "intermediate",
       },
       {
         id: "driver-practice",
@@ -1116,6 +1244,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://gm0.org/en/latest/docs/competition/driver-practice",
         tags: ["Driver", "Practice", "TeleOp", "Strategy"],
         type: "guide",
+        level: "intermediate",
       },
       {
         id: "pre-match-checklist",
@@ -1124,6 +1253,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://gm0.org/en/latest/docs/competition/pre-match-checklist",
         tags: ["Checklist", "Competition", "Preparation", "Guide"],
         type: "guide",
+        level: "beginner",
       },
       {
         id: "scoring-analysis",
@@ -1132,6 +1262,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://gm0.org/en/latest/docs/competition/game-analysis",
         tags: ["Scoring", "Analysis", "Strategy", "Competition"],
         type: "guide",
+        level: "advanced",
       },
       {
         id: "ftc-events",
@@ -1140,6 +1271,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://www.firstinspires.org/find-an-event",
         tags: ["Events", "Competition", "Official", "Schedule"],
         type: "official",
+        level: "beginner",
       },
       {
         id: "inspection-guide",
@@ -1148,6 +1280,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://gm0.org/en/latest/docs/competition/robot-inspection",
         tags: ["Inspection", "Rules", "Competition", "Guide"],
         type: "guide",
+        level: "beginner",
       },
       {
         id: "gracious-professionalism",
@@ -1156,6 +1289,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://www.firstinspires.org/about/values",
         tags: ["GP", "Culture", "FIRST", "Community"],
         type: "official",
+        level: "beginner",
       },
       {
         id: "scouting-spreadsheet",
@@ -1164,6 +1298,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://gm0.org/en/latest/docs/competition/match-scouting",
         tags: ["Scouting", "Spreadsheet", "Tool", "Competition"],
         type: "tool",
+        level: "intermediate",
       },
       {
         id: "autonomous-selection",
@@ -1172,6 +1307,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://gm0.org/en/latest/docs/software/tutorials/auto-selection",
         tags: ["Autonomous", "Selection", "Strategy", "Guide"],
         type: "guide",
+        level: "intermediate",
       },
       {
         id: "robot-reveal-guide",
@@ -1180,6 +1316,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://www.reddit.com/r/FTC",
         tags: ["Video", "Reveal", "Community", "Guide"],
         type: "guide",
+        level: "beginner",
       },
       {
         id: "match-strategy",
@@ -1188,6 +1325,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://gm0.org/en/latest/docs/competition",
         tags: ["Strategy", "Match", "Competition", "Guide"],
         type: "guide",
+        level: "intermediate",
       },
     ],
   },
@@ -1204,6 +1342,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://www.firstinspires.org/resource-library/ftc/judge-advisor-resources",
         tags: ["Inspire", "Award", "Judges", "Official"],
         type: "official",
+        level: "beginner",
       },
       {
         id: "engineering-portfolio",
@@ -1212,6 +1351,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://gm0.org/en/latest/docs/awards/engineering-portfolio",
         tags: ["Portfolio", "Inspire", "Writing", "Guide"],
         type: "guide",
+        level: "intermediate",
       },
       {
         id: "outreach-guide",
@@ -1220,6 +1360,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://gm0.org/en/latest/docs/awards/outreach",
         tags: ["Outreach", "Community", "Inspire", "Guide"],
         type: "guide",
+        level: "beginner",
       },
       {
         id: "team-management",
@@ -1228,6 +1369,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://gm0.org/en/latest/docs/team-management",
         tags: ["Team", "Management", "Guide", "Organization"],
         type: "guide",
+        level: "beginner",
       },
       {
         id: "first-values",
@@ -1236,6 +1378,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://www.firstinspires.org/about/values",
         tags: ["FIRST", "Values", "Culture", "Official"],
         type: "official",
+        level: "beginner",
       },
       {
         id: "judge-interview-prep",
@@ -1244,6 +1387,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://gm0.org/en/latest/docs/awards/winning-awards",
         tags: ["Interview", "Awards", "Inspire", "Guide"],
         type: "guide",
+        level: "intermediate",
       },
       {
         id: "engineering-notebook",
@@ -1252,6 +1396,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://gm0.org/en/latest/docs/awards/engineering-notebook",
         tags: ["Notebook", "Documentation", "Inspire", "Guide"],
         type: "guide",
+        level: "beginner",
       },
       {
         id: "team-structure",
@@ -1260,6 +1405,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://gm0.org/en/latest/docs/team-management/team-roles",
         tags: ["Team", "Roles", "Organization", "Guide"],
         type: "guide",
+        level: "beginner",
       },
       {
         id: "design-process",
@@ -1268,6 +1414,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://gm0.org/en/latest/docs/robot-design",
         tags: ["Design Process", "Engineering", "Prototype", "Guide"],
         type: "guide",
+        level: "intermediate",
       },
       {
         id: "connect-award",
@@ -1276,6 +1423,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://gm0.org/en/latest/docs/awards/connect-award",
         tags: ["Connect", "Award", "Outreach", "Guide"],
         type: "guide",
+        level: "intermediate",
       },
       {
         id: "think-award",
@@ -1284,6 +1432,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://gm0.org/en/latest/docs/awards/think-award",
         tags: ["Think", "Award", "Software", "Guide"],
         type: "guide",
+        level: "intermediate",
       },
       {
         id: "innovate-award",
@@ -1292,6 +1441,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://gm0.org/en/latest/docs/awards/innovate-award",
         tags: ["Innovate", "Award", "Hardware", "Guide"],
         type: "guide",
+        level: "intermediate",
       },
       {
         id: "portfolio-examples",
@@ -1300,6 +1450,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://gm0.org/en/latest/docs/awards/engineering-portfolio",
         tags: ["Portfolio", "Examples", "Inspire", "Guide"],
         type: "guide",
+        level: "beginner",
       },
       {
         id: "team-sustainability",
@@ -1308,6 +1459,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://gm0.org/en/latest/docs/team-management/sustainability",
         tags: ["Sustainability", "Alumni", "Team", "Guide"],
         type: "guide",
+        level: "intermediate",
       },
       {
         id: "business-plan",
@@ -1316,6 +1468,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://gm0.org/en/latest/docs/awards/compass-award",
         tags: ["Business Plan", "Sponsors", "Award", "Guide"],
         type: "guide",
+        level: "intermediate",
       },
       {
         id: "control-award",
@@ -1324,6 +1477,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://gm0.org/en/latest/docs/awards/control-award",
         tags: ["Control", "Award", "Software", "Guide"],
         type: "guide",
+        level: "intermediate",
       },
       {
         id: "judge-feedback",
@@ -1332,6 +1486,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://gm0.org/en/latest/docs/awards/winning-awards",
         tags: ["Judges", "Feedback", "Improvement", "Guide"],
         type: "guide",
+        level: "intermediate",
       },
       {
         id: "team-branding",
@@ -1340,6 +1495,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://gm0.org/en/latest/docs/team-management",
         tags: ["Branding", "Identity", "Team", "Guide"],
         type: "guide",
+        level: "beginner",
       },
       {
         id: "sponsorship-guide",
@@ -1348,6 +1504,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://gm0.org/en/latest/docs/team-management/fundraising",
         tags: ["Sponsorship", "Fundraising", "Team", "Guide"],
         type: "guide",
+        level: "intermediate",
       },
     ],
   },
@@ -1364,6 +1521,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://discord.gg/first-tech-challenge",
         tags: ["Community", "Discord", "Help", "Chat"],
         type: "tool",
+        level: "beginner",
       },
       {
         id: "ftc-subreddit",
@@ -1372,6 +1530,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://www.reddit.com/r/FTC",
         tags: ["Community", "Reddit", "Discussion"],
         type: "tool",
+        level: "beginner",
       },
       {
         id: "github-ftc",
@@ -1380,6 +1539,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://github.com/search?q=FTC+robot&type=repositories",
         tags: ["GitHub", "Open Source", "Community", "Code"],
         type: "tool",
+        level: "beginner",
       },
       {
         id: "android-studio",
@@ -1388,6 +1548,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://developer.android.com/studio",
         tags: ["IDE", "Android Studio", "Tool", "Programming"],
         type: "tool",
+        level: "beginner",
       },
       {
         id: "gm0-discord",
@@ -1396,6 +1557,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://discord.gg/gm0",
         tags: ["Community", "Discord", "GM0", "Help"],
         type: "tool",
+        level: "beginner",
       },
       {
         id: "ftc-youtube",
@@ -1404,6 +1566,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://www.youtube.com/@FIRSTInspires",
         tags: ["YouTube", "Video", "Official", "Community"],
         type: "video",
+        level: "beginner",
       },
       {
         id: "gobilda-youtube",
@@ -1412,6 +1575,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://www.youtube.com/@goBILDA",
         tags: ["YouTube", "Build", "goBILDA", "Video"],
         type: "video",
+        level: "beginner",
       },
       {
         id: "rev-youtube",
@@ -1420,6 +1584,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://www.youtube.com/@REVRobotics",
         tags: ["YouTube", "REV", "Hardware", "Video"],
         type: "video",
+        level: "beginner",
       },
       {
         id: "acme-robotics-github",
@@ -1428,6 +1593,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://github.com/acmerobotics",
         tags: ["GitHub", "Open Source", "Road Runner", "Library"],
         type: "repo",
+        level: "advanced",
       },
       {
         id: "openftc-github",
@@ -1436,6 +1602,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://github.com/OpenFTC",
         tags: ["GitHub", "Open Source", "Vision", "Library"],
         type: "repo",
+        level: "advanced",
       },
       {
         id: "ftclib-github",
@@ -1445,6 +1612,7 @@ export const RESOURCES: ResourceCategory[] = [
         tags: ["GitHub", "FTCLib", "Library", "Open Source"],
         type: "repo",
         stars: 450,
+        level: "advanced",
       },
       {
         id: "pedro-github",
@@ -1454,6 +1622,7 @@ export const RESOURCES: ResourceCategory[] = [
         tags: ["GitHub", "Pedro Pathing", "Autonomous", "Open Source"],
         type: "repo",
         stars: 400,
+        level: "advanced",
       },
       {
         id: "wpilib-ftc",
@@ -1462,6 +1631,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://docs.wpilib.org/en/stable/docs/software/advanced-controls",
         tags: ["Control", "PID", "WPILib", "Guide"],
         type: "guide",
+        level: "advanced",
       },
       {
         id: "ftc-forums",
@@ -1470,6 +1640,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://ftc-qa.firstinspires.org",
         tags: ["Forums", "Q&A", "Rules", "Official"],
         type: "official",
+        level: "beginner",
       },
       {
         id: "team-10303-github",
@@ -1478,6 +1649,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://github.com/BrainStem-FIRST",
         tags: ["GitHub", "Top Team", "Open Source", "Repo"],
         type: "repo",
+        level: "advanced",
       },
       {
         id: "team-19922-github",
@@ -1486,6 +1658,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://github.com/Thermal-Equilibrium",
         tags: ["GitHub", "Top Team", "Open Source", "Repo"],
         type: "repo",
+        level: "advanced",
       },
       {
         id: "tech-toolkit",
@@ -1494,6 +1667,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://ftc-docs.firstinspires.org",
         tags: ["Tools", "Simulation", "Calculator", "Resource"],
         type: "tool",
+        level: "intermediate",
       },
       {
         id: "first-community-network",
@@ -1502,6 +1676,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://www.firstinspires.org/community",
         tags: ["Community", "Mentors", "Network", "Official"],
         type: "official",
+        level: "beginner",
       },
       {
         id: "ftc-season-archive",
@@ -1510,6 +1685,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://ftc-docs.firstinspires.org/en/latest/season_resources",
         tags: ["Archive", "History", "Games", "Official"],
         type: "official",
+        level: "beginner",
       },
       {
         id: "java-intellij-tips",
@@ -1518,6 +1694,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://www.jetbrains.com/idea/guide",
         tags: ["IDE", "IntelliJ", "Productivity", "Tool"],
         type: "tool",
+        level: "intermediate",
       },
       {
         id: "gm0-robot-build",
@@ -1526,6 +1703,7 @@ export const RESOURCES: ResourceCategory[] = [
         url: "https://gm0.org/en/latest/docs/hardware-basics/tips-and-tricks",
         tags: ["Build", "Hardware", "Tips", "Guide"],
         type: "guide",
+        level: "beginner",
       },
     ],
   },
