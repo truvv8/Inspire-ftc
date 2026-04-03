@@ -4,7 +4,8 @@
     "materials": "Materials",
     "calendar": "FTC Calendar",
     "signIn": "Sign In",
-    "leaderboard": "Leaderboard"
+    "leaderboard": "Leaderboard",
+    "resources": "Resources"
   },
   "home": {
     "badge": "Platform for FIRST Tech Challenge",
@@ -115,7 +116,15 @@
     "addToGoogle": "Add to Google Calendar",
     "close": "Close",
     "submitEvent": "+ Submit Community Event",
-    "weekdays": ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
+    "weekdays": [
+      "Mon",
+      "Tue",
+      "Wed",
+      "Thu",
+      "Fri",
+      "Sat",
+      "Sun"
+    ]
   },
   "submitEvent": {
     "title": "Submit Event Announcement",

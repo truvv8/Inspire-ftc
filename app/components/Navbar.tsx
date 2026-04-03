@@ -27,6 +27,10 @@ export default async function Navbar() {
             {t("materials")}
           </Link>
 
+          <Link href="/resources" className="text-white/50 transition hover:text-white">
+            {t("resources")}
+          </Link>
+
           <Link
             href="/calendar"
             className="text-white/50 transition hover:text-white"

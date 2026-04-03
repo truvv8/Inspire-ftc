@@ -4,7 +4,8 @@
     "materials": "Материалы",
     "calendar": "FTC Calendar",
     "signIn": "Войти",
-    "leaderboard": "Лидерборд"
+    "leaderboard": "Лидерборд",
+    "resources": "Ресурсы"
   },
   "home": {
     "badge": "Платформа для FIRST Tech Challenge",
@@ -115,7 +116,15 @@
     "addToGoogle": "Добавить в Google Calendar",
     "close": "Закрыть",
     "submitEvent": "+ Предложить мероприятие",
-    "weekdays": ["Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Вс"]
+    "weekdays": [
+      "Пн",
+      "Вт",
+      "Ср",
+      "Чт",
+      "Пт",
+      "Сб",
+      "Вс"
+    ]
   },
   "submitEvent": {
     "title": "Отправить анонс мероприятия",
