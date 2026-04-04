@@ -33,26 +33,49 @@ export default async function HomePage() {
               {t("description")}
             </p>
 
-            <div className="animate-fade-up-delay-2 flex flex-wrap items-center justify-center gap-3 lg:justify-start">
+            <div className="animate-fade-up-delay-2 grid grid-cols-2 gap-3 sm:grid-cols-2 lg:grid-cols-2 w-full max-w-sm lg:max-w-md">
               <Link
                 href="/materials"
-                className="rounded-xl bg-inspire-green px-7 py-3 font-semibold text-white shadow-lg shadow-emerald-500/20 transition hover:-translate-y-0.5 hover:bg-emerald-600 hover:shadow-emerald-500/30"
+                className="group flex flex-col items-center gap-2 rounded-2xl bg-inspire-green px-5 py-4 font-bold text-white shadow-lg shadow-emerald-500/25 transition hover:-translate-y-1 hover:bg-emerald-500 hover:shadow-emerald-500/40 active:scale-95"
               >
-                {t("ctaMaterials")}
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className="h-6 w-6 transition group-hover:scale-110">
+                  <path d="M4 19.5A2.5 2.5 0 016.5 17H20" strokeLinecap="round" strokeLinejoin="round" />
+                  <path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+                <span className="text-sm leading-tight text-center">{t("ctaMaterials")}</span>
+              </Link>
+
+              <Link
+                href="/resources"
+                className="group flex flex-col items-center gap-2 rounded-2xl border border-inspire-green/40 bg-inspire-green/10 px-5 py-4 font-bold text-emerald-300 backdrop-blur-sm transition hover:-translate-y-1 hover:border-inspire-green/70 hover:bg-inspire-green/20 hover:text-emerald-200 active:scale-95"
+              >
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className="h-6 w-6 transition group-hover:scale-110">
+                  <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+                <span className="text-sm leading-tight text-center">{t("ctaResources")}</span>
               </Link>
 
               <Link
                 href="/calendar"
-                className="rounded-xl border border-inspire-green/30 bg-white/5 px-7 py-3 font-semibold text-white backdrop-blur-sm transition hover:-translate-y-0.5 hover:border-inspire-green/50 hover:bg-white/10"
+                className="group flex flex-col items-center gap-2 rounded-2xl border border-white/10 bg-white/5 px-5 py-4 font-bold text-white backdrop-blur-sm transition hover:-translate-y-1 hover:border-white/20 hover:bg-white/10 active:scale-95"
               >
-                {t("ctaCalendar")}
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className="h-6 w-6 transition group-hover:scale-110">
+                  <rect x="3" y="4" width="18" height="18" rx="2" strokeLinecap="round" />
+                  <path d="M16 2v4M8 2v4M3 10h18" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+                <span className="text-sm leading-tight text-center">{t("ctaCalendar")}</span>
               </Link>
 
               <a
                 href="#contribute"
-                className="rounded-xl bg-inspire-green-deep px-7 py-3 font-semibold text-emerald-100 transition hover:-translate-y-0.5 hover:bg-emerald-800"
+                className="group flex flex-col items-center gap-2 rounded-2xl bg-inspire-green-deep px-5 py-4 font-bold text-emerald-100 transition hover:-translate-y-1 hover:bg-emerald-800 active:scale-95"
               >
-                {t("ctaContribute")}
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className="h-6 w-6 transition group-hover:scale-110">
+                  <path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2" strokeLinecap="round" strokeLinejoin="round" />
+                  <circle cx="9" cy="7" r="4" strokeLinecap="round" />
+                  <path d="M19 8v6m3-3h-6" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+                <span className="text-sm leading-tight text-center">{t("ctaContribute")}</span>
               </a>
             </div>
           </div>
