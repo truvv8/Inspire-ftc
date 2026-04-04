@@ -39,10 +39,12 @@ export default async function HomePage() {
                 className="group flex flex-col items-center gap-2 rounded-2xl bg-inspire-green px-5 py-4 font-bold text-white shadow-lg shadow-emerald-500/25 transition hover:-translate-y-1 hover:bg-emerald-500 hover:shadow-emerald-500/40 active:scale-95"
               >
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className="h-6 w-6 transition group-hover:scale-110">
-                  <path d="M4 19.5A2.5 2.5 0 016.5 17H20" strokeLinecap="round" strokeLinejoin="round" />
-                  <path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z" strokeLinecap="round" strokeLinejoin="round" />
+                  <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" strokeLinecap="round" strokeLinejoin="round" />
+                  <circle cx="9" cy="7" r="4" strokeLinecap="round" />
+                  <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
                 <span className="text-sm leading-tight text-center">{t("ctaMaterials")}</span>
+                <span className="text-xs font-normal text-white/70 leading-tight text-center">by FTC teams</span>
               </Link>
 
               <Link
@@ -50,9 +52,11 @@ export default async function HomePage() {
                 className="group flex flex-col items-center gap-2 rounded-2xl border border-inspire-green/40 bg-inspire-green/10 px-5 py-4 font-bold text-emerald-300 backdrop-blur-sm transition hover:-translate-y-1 hover:border-inspire-green/70 hover:bg-inspire-green/20 hover:text-emerald-200 active:scale-95"
               >
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className="h-6 w-6 transition group-hover:scale-110">
-                  <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" strokeLinecap="round" strokeLinejoin="round" />
+                  <circle cx="12" cy="12" r="3" strokeLinecap="round" />
+                  <path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
                 <span className="text-sm leading-tight text-center">{t("ctaResources")}</span>
+                <span className="text-xs font-normal text-emerald-400/70 leading-tight text-center">open-source libraries</span>
               </Link>
 
               <Link
