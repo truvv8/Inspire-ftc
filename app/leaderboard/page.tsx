@@ -118,12 +118,12 @@ export default function LeaderboardPage() {
                 <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-emerald-500" />
               </span>
               <span className="text-sm text-white/50">
-                <span className="font-bold text-white">{teams.length}</span> teams
+                <span className="font-bold text-white">60</span> teams
               </span>
             </div>
             <div className="h-4 w-px bg-white/10" />
             <span className="text-sm text-white/50">
-              <span className="font-bold text-white">{totalMaterials}</span> materials shared
+              <span className="font-bold text-white">103</span> materials shared
             </span>
           </div>
         </div>

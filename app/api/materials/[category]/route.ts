@@ -3,12 +3,13 @@ import { supabase } from "@/lib/supabase";
 
 export async function GET(
   _: Request,
-  { params }: { params: { category: string } }
+  { params }: { params: Promise<{ category: string }> }
 ) {
+  const { category } = await params;
   const { data, error } = await supabase
   .from("materials")
   .select("*")
-  .eq("category", params.category)
+  .eq("category", category)
   .eq("status", "approved") // ✅ ВОТ ЭТО КЛЮЧ
   .order("created_at", { ascending: false });
 
