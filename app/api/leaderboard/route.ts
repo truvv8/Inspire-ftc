@@ -78,65 +78,66 @@ export async function GET() {
     }))
     .sort((a, b) => b.materials - a.materials);
 
+  // Real FTC teams ranked 200+ in the 2025-26 Decode season (ftcscout.org), 14 countries
   const PLACEHOLDER_TEAMS = [
-    // 🇷🇺 Russia (6)
-    { id: "siberian_mechanics", name: "Siberian Mechanics", ftcName: "SiberianMechanics_FTC", materials: 1, categories: ["robot"], lastUpload: "" },
-    { id: "ural_voltage", name: "Ural Voltage", ftcName: "UralVoltage_FTC", materials: 1, categories: ["code"], lastUpload: "" },
-    { id: "taiga_tech", name: "Taiga Tech", ftcName: "TaigaTech_FTC", materials: 1, categories: ["inspire"], lastUpload: "" },
-    { id: "polar_circuit", name: "Polar Circuit", ftcName: "PolarCircuit_FTC", materials: 1, categories: ["robot", "code"], lastUpload: "" },
-    { id: "volga_bots", name: "Volga Bots", ftcName: "VolgaBots_FTC", materials: 1, categories: ["robot"], lastUpload: "" },
-    { id: "baikal_drive", name: "Baikal Drive", ftcName: "BaikalDrive_FTC", materials: 1, categories: ["inspire"], lastUpload: "" },
-    // 🇰🇿 Kazakhstan (4)
-    { id: "steppe_robotics", name: "Steppe Robotics", ftcName: "SteppeRobotics_FTC", materials: 1, categories: ["robot"], lastUpload: "" },
-    { id: "altai_gears", name: "Altai Gears", ftcName: "AltaiGears_FTC", materials: 1, categories: ["code"], lastUpload: "" },
-    { id: "nomad_tech", name: "Nomad Tech", ftcName: "NomadTech_FTC", materials: 1, categories: ["inspire"], lastUpload: "" },
-    { id: "tengri_bots", name: "Tengri Bots", ftcName: "TengriBots_FTC", materials: 1, categories: ["robot"], lastUpload: "" },
-    // 🇲🇽 Mexico (3)
-    { id: "condor_mech", name: "Condor Mech", ftcName: "CondorMech_FTC", materials: 1, categories: ["robot"], lastUpload: "" },
-    { id: "tenochtitlan_tech", name: "Tenochtitlan Tech", ftcName: "TenochtitlanTech_FTC", materials: 1, categories: ["code"], lastUpload: "" },
-    { id: "aguila_robotics", name: "Aguila Robotics", ftcName: "AguilaRobotics_FTC", materials: 1, categories: ["inspire"], lastUpload: "" },
-    // 🇧🇷 Brazil (3)
-    { id: "cerrado_bots", name: "Cerrado Bots", ftcName: "CerradoBots_FTC", materials: 1, categories: ["robot"], lastUpload: "" },
-    { id: "pantanal_tech", name: "Pantanal Tech", ftcName: "PantanalTech_FTC", materials: 1, categories: ["code"], lastUpload: "" },
-    { id: "amazonia_drive", name: "Amazonia Drive", ftcName: "AmazoniaDrive_FTC", materials: 1, categories: ["inspire", "robot"], lastUpload: "" },
-    // 🇮🇳 India (3)
-    { id: "deccan_robotics", name: "Deccan Robotics", ftcName: "DeccanRobotics_FTC", materials: 1, categories: ["robot"], lastUpload: "" },
-    { id: "himalaya_bots", name: "Himalaya Bots", ftcName: "HimalayaBots_FTC", materials: 1, categories: ["code"], lastUpload: "" },
-    { id: "indus_tech", name: "Indus Tech", ftcName: "IndusTech_FTC", materials: 1, categories: ["inspire"], lastUpload: "" },
-    // 🇦🇺 Australia (3)
-    { id: "outback_mechanics", name: "Outback Mechanics", ftcName: "OutbackMechanics_FTC", materials: 1, categories: ["robot"], lastUpload: "" },
-    { id: "coral_coders", name: "Coral Coders", ftcName: "CoralCoders_FTC", materials: 1, categories: ["code"], lastUpload: "" },
-    { id: "dingo_drive", name: "Dingo Drive", ftcName: "DingoDrive_FTC", materials: 1, categories: ["inspire"], lastUpload: "" },
-    // 🇰🇷 South Korea (3)
-    { id: "hangang_bots", name: "Hangang Bots", ftcName: "HangangBots_FTC", materials: 1, categories: ["robot"], lastUpload: "" },
-    { id: "seorak_tech", name: "Seorak Tech", ftcName: "SeorakTech_FTC", materials: 1, categories: ["code"], lastUpload: "" },
-    { id: "busan_circuit", name: "Busan Circuit", ftcName: "BusanCircuit_FTC", materials: 1, categories: ["inspire", "code"], lastUpload: "" },
-    // 🇳🇱 Netherlands (3)
-    { id: "windmill_robotics", name: "Windmill Robotics", ftcName: "WindmillRobotics_FTC", materials: 1, categories: ["robot"], lastUpload: "" },
-    { id: "polder_tech", name: "Polder Tech", ftcName: "PolderTech_FTC", materials: 1, categories: ["code"], lastUpload: "" },
-    { id: "deltawerk_bots", name: "Deltawerk Bots", ftcName: "DeltawerkBots_FTC", materials: 1, categories: ["inspire"], lastUpload: "" },
-    // 🇹🇷 Turkey (3)
-    { id: "bosphorus_bots", name: "Bosphorus Bots", ftcName: "BosphorusBots_FTC", materials: 1, categories: ["robot"], lastUpload: "" },
-    { id: "anatolian_tech", name: "Anatolian Tech", ftcName: "AnatolianTech_FTC", materials: 1, categories: ["code"], lastUpload: "" },
-    { id: "cappadocia_circuit", name: "Cappadocia Circuit", ftcName: "CappadociaCircuit_FTC", materials: 1, categories: ["inspire"], lastUpload: "" },
-    // 🇮🇱 Israel (2)
-    { id: "negev_robotics", name: "Negev Robotics", ftcName: "NegevRobotics_FTC", materials: 1, categories: ["robot"], lastUpload: "" },
-    { id: "galilee_tech", name: "Galilee Tech", ftcName: "GalileeTech_FTC", materials: 1, categories: ["code"], lastUpload: "" },
-    // 🇨🇦 Canada (3)
-    { id: "yukon_bots", name: "Yukon Bots", ftcName: "YukonBots_FTC", materials: 1, categories: ["robot"], lastUpload: "" },
-    { id: "laurentian_tech", name: "Laurentian Tech", ftcName: "LaurentianTech_FTC", materials: 1, categories: ["code"], lastUpload: "" },
-    { id: "prairie_circuit", name: "Prairie Circuit", ftcName: "PrairieCircuit_FTC", materials: 1, categories: ["inspire"], lastUpload: "" },
-    // 🇩🇪 Germany (2)
-    { id: "schwarzwald_bots", name: "Schwarzwald Bots", ftcName: "SchwarzwaldBots_FTC", materials: 1, categories: ["robot"], lastUpload: "" },
-    { id: "rheinland_tech", name: "Rheinland Tech", ftcName: "RheinlandTech_FTC", materials: 1, categories: ["code"], lastUpload: "" },
-    // 🇨🇳 China (2)
-    { id: "yangtze_robotics", name: "Yangtze Robotics", ftcName: "YangtzeRobotics_FTC", materials: 1, categories: ["robot"], lastUpload: "" },
-    { id: "gobi_tech", name: "Gobi Tech", ftcName: "GobiTech_FTC", materials: 1, categories: ["inspire"], lastUpload: "" },
-    // 🇺🇦 Ukraine (2)
-    { id: "carpathian_bots", name: "Carpathian Bots", ftcName: "CarpathianBots_FTC", materials: 1, categories: ["robot"], lastUpload: "" },
-    { id: "dnipro_circuit", name: "Dnipro Circuit", ftcName: "DniproCircuit_FTC", materials: 1, categories: ["code"], lastUpload: "" },
-    // 🇷🇴 Romania (1)
-    { id: "transylvania_tech", name: "Transylvania Tech", ftcName: "TransylvaniaTech_FTC", materials: 1, categories: ["inspire"], lastUpload: "" },
+    // 🇷🇴 Romania
+    { id: "start_code_24037", name: "Start Code", ftcName: "StartCode_FTC", materials: 1, categories: ["code"], lastUpload: "" },
+    { id: "arra_25538", name: "ARRA", ftcName: "ARRA_FTC", materials: 1, categories: ["robot"], lastUpload: "" },
+    { id: "cyberlis76_23161", name: "CyberLIS76", ftcName: "CyberLIS76_FTC", materials: 1, categories: ["code", "inspire"], lastUpload: "" },
+    { id: "dragonic_force_19064", name: "Dragonic Force", ftcName: "DragonicForce_FTC", materials: 1, categories: ["robot"], lastUpload: "" },
+    { id: "robotitans_15989", name: "RoboTitans", ftcName: "RoboTitans_FTC", materials: 1, categories: ["robot", "inspire"], lastUpload: "" },
+    { id: "mechabyte_22590", name: "MechaByte", ftcName: "MechaByte_FTC", materials: 1, categories: ["code"], lastUpload: "" },
+    { id: "sngine_20043", name: "SNGine", ftcName: "SNGine_FTC", materials: 1, categories: ["inspire"], lastUpload: "" },
+    { id: "watt_s_up_16166", name: "Watt'S Up", ftcName: "WattSUp_FTC", materials: 1, categories: ["robot"], lastUpload: "" },
+    // 🇨🇳 China
+    { id: "cosmic_spark_16093", name: "Cosmic Spark", ftcName: "CosmicSpark_FTC", materials: 1, categories: ["inspire"], lastUpload: "" },
+    { id: "dream_wind_19612", name: "Dream wind", ftcName: "DreamWind_FTC", materials: 1, categories: ["robot"], lastUpload: "" },
+    { id: "ripples_25832", name: "ripples", ftcName: "ripples_FTC", materials: 1, categories: ["code"], lastUpload: "" },
+    { id: "bbk_robotics_32009", name: "BBK Robotics", ftcName: "BBKRobotics_FTC", materials: 1, categories: ["robot"], lastUpload: "" },
+    { id: "sprint_forward_19681", name: "sprint forward", ftcName: "SprintForward_FTC", materials: 1, categories: ["code"], lastUpload: "" },
+    { id: "grid_forge_31715", name: "Grid Forge", ftcName: "GridForge_FTC", materials: 1, categories: ["inspire"], lastUpload: "" },
+    { id: "techby_25787", name: "TechBY", ftcName: "TechBY_FTC", materials: 1, categories: ["robot"], lastUpload: "" },
+    { id: "lithiumpulse_30319", name: "LithiumPulse", ftcName: "LithiumPulse_FTC", materials: 1, categories: ["code", "robot"], lastUpload: "" },
+    // 🇮🇳 India
+    { id: "g_force_19013", name: "G-Force", ftcName: "GForce_FTC", materials: 1, categories: ["robot"], lastUpload: "" },
+    { id: "mad_engineers_25100", name: "MAD ENGINEERS", ftcName: "MadEngineers_FTC", materials: 1, categories: ["inspire"], lastUpload: "" },
+    { id: "2ez_28298", name: "2EZ", ftcName: "TwoEZ_FTC", materials: 1, categories: ["code"], lastUpload: "" },
+    { id: "spark_sk2_22751", name: "SPARK SK2", ftcName: "SparkSK2_FTC", materials: 1, categories: ["robot"], lastUpload: "" },
+    { id: "team_matrix_20870", name: "Team Matrix", ftcName: "TeamMatrix_FTC", materials: 1, categories: ["inspire", "code"], lastUpload: "" },
+    // 🇧🇷 Brazil
+    { id: "space_tech_23504", name: "Space Tech", ftcName: "SpaceTech_FTC", materials: 1, categories: ["robot"], lastUpload: "" },
+    { id: "rev_atom_16058", name: "Rev Atom", ftcName: "RevAtom_FTC", materials: 1, categories: ["code"], lastUpload: "" },
+    { id: "tech_dragons_26960", name: "Tech Dragons", ftcName: "TechDragons_FTC", materials: 1, categories: ["inspire"], lastUpload: "" },
+    { id: "tech_fenix_23055", name: "Tech Fenix", ftcName: "TechFenix_FTC", materials: 1, categories: ["robot"], lastUpload: "" },
+    // 🇨🇦 Canada
+    { id: "robeartics_19500", name: "RoBEARtics", ftcName: "RoBEARtics_FTC", materials: 1, categories: ["inspire"], lastUpload: "" },
+    { id: "roc_16417", name: "ROC", ftcName: "ROC_FTC", materials: 1, categories: ["robot"], lastUpload: "" },
+    { id: "atom_smashers_20025", name: "Esquimalt Atom Smashers", ftcName: "AtomSmashers_FTC", materials: 1, categories: ["code"], lastUpload: "" },
+    { id: "hyper_droid_10015", name: "Hyper Droid", ftcName: "HyperDroid_FTC", materials: 1, categories: ["robot"], lastUpload: "" },
+    // 🇳🇱 Netherlands
+    { id: "beargineers_27628", name: "Beargineers", ftcName: "Beargineers_FTC", materials: 1, categories: ["inspire"], lastUpload: "" },
+    { id: "trojan_robotics_24090", name: "Trojan Robotics", ftcName: "TrojanRobotics_FTC", materials: 1, categories: ["robot", "code"], lastUpload: "" },
+    // 🇹🇭 Thailand
+    { id: "alphacosmos_28188", name: "ALPHACOSMOS", ftcName: "AlphaCosmos_FTC", materials: 1, categories: ["inspire"], lastUpload: "" },
+    { id: "dinonaut_27572", name: "Dinonaut", ftcName: "Dinonaut_FTC", materials: 1, categories: ["robot"], lastUpload: "" },
+    { id: "allnew101_24070", name: "AllNew101", ftcName: "AllNew101_FTC", materials: 1, categories: ["code"], lastUpload: "" },
+    // 🇲🇽 Mexico
+    { id: "prepatec_overture_23619", name: "PrepaTec OVERTURE", ftcName: "PrepaTecOVERTURE_FTC", materials: 1, categories: ["inspire"], lastUpload: "" },
+    { id: "devolt_phobos_16836", name: "Devolt Phobos", ftcName: "DevoltPhobos_FTC", materials: 1, categories: ["robot"], lastUpload: "" },
+    // 🇻🇳 Vietnam
+    { id: "greenams_robotics_24751", name: "GreenAms Robotics", ftcName: "GreenAmsRobotics_FTC", materials: 1, categories: ["inspire"], lastUpload: "" },
+    // 🇩🇪 Germany
+    { id: "robotictechfrox_20092", name: "RTF-RoboticTechFrox", ftcName: "RoboticTechFrox_FTC", materials: 1, categories: ["code"], lastUpload: "" },
+    // 🇫🇷 France
+    { id: "frites_20991", name: "FRITES", ftcName: "FRITES_FTC", materials: 1, categories: ["robot"], lastUpload: "" },
+    // 🇹🇷 Turkey
+    { id: "joyful_robotics_29613", name: "Joyful Robotics", ftcName: "JoyfulRobotics_FTC", materials: 1, categories: ["inspire"], lastUpload: "" },
+    // 🇱🇹 Lithuania
+    { id: "android_25963", name: "Android", ftcName: "AndroidLT_FTC", materials: 1, categories: ["code"], lastUpload: "" },
+    // 🇳🇿 New Zealand
+    { id: "referees_11511", name: "Referees", ftcName: "Referees_FTC", materials: 1, categories: ["robot", "inspire"], lastUpload: "" },
+    // 🇮🇱 Israel
+    { id: "roboten_15298", name: "RoboTen", ftcName: "RoboTen_FTC", materials: 1, categories: ["code"], lastUpload: "" },
   ];
 
   const existing = new Set(leaderboard.map((t) => t.id));
